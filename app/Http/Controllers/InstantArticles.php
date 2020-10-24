@@ -218,7 +218,7 @@ $instant_article= '<!doctype html>
         // $content = str_ireplace('></p>','>',$content);  
         
         // var_dump($content);
-         dd($content);
+         // dd($content);
         ///// anh cover
         $content_phu = $content;
         for ($i=0; $i<60; $i++) { 
