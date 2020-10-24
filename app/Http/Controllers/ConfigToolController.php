@@ -15,7 +15,9 @@ class ConfigToolController extends Controller
      */
     public function index()
     {
-        return view('pages.config_admin');
+         $list_web = ConfigWeb::all();
+         $list_token = ConfigTool::all();
+        return view('pages.config_admin',['list_web'=>$list_web, 'list_token' =>$list_token]);
     }
 
     /**
@@ -36,8 +38,13 @@ class ConfigToolController extends Controller
     {
      $data = $request->except('_token');
     ConfigWeb::create($data);
-    return redirect()->route('adminHome')->with(['status'=>'gsfshfj']);
+    return redirect()->route('adminHome');
 
+    }
+    public function deleteConfigWeb($id){
+        $row = ConfigWeb::find($id);
+        $row->delete();
+        return redirect()->route('adminHome');
     }
     /**
      * Store a newly created resource in storage.

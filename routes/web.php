@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('admintool','ConfigToolController@index' )->name('adminHome');  //về trang admin
 Route::post('admin/token','ConfigToolController@createToken')->name('adminToken'); //tao token
 Route::post('admin/web','ConfigToolController@createWeb')->name('adminWeb');//tạo cài đặt web
+Route::get('admin/web/delete/{id}','ConfigToolController@deleteConfigWeb')->name('deleteConfigWeb');//tạo cài đặt web
 
 //Các route chính//
 
