@@ -162,8 +162,6 @@ $instant_article= '<!doctype html>
         $content = $response->json()['content']['rendered'];
         $content =  strip_tags($content, '<p> <img>'); //chi nhận thẻ p và img
 
-      
-
         for ($i=0; $i < 20 ; $i++) { 
             $p_class =  $this->GetBetween($content,'<p class','>');
             $content = str_ireplace('<p class'.$p_class,'<p',$content);    
@@ -175,16 +173,20 @@ $instant_article= '<!doctype html>
         }
         
         for ($i=0; $i < 20 ; $i++) { 
-            $p_class =  $this->GetBetween($content,'<p data','>');
-            $content = str_ireplace('<p data'.$p_class,'<p',$content);    
+            $p_class =  $this->GetBetween($content,'<p daᴛa','>');   
+            $content = str_ireplace('<p daᴛa'.$p_class,'<p',$content);    
         }
-
+        for ($i=0; $i < 20 ; $i++) { 
+            $p_class =  $this->GetBetween($content,'<p data','>');
+            $content = str_ireplace('<p data'.$p_class,'<p',$content);       
+        }
         for ($i=0; $i < 50 ; $i++) { 
             $p_img =  $this->GetBetween($content,'<p><img','</p>');
         $content = str_ireplace('<p><img'.$p_img.'</p>','<img'.$p_img,$content);
-        }       
+        }    
+         // $content = str_ireplace("\n\n",'',$content);
+         // $content = str_ireplace("</p>","</p>\n",$content);
 
-         // dd($content);
          $p_trc = [];
          $p_sau = [];
         $content_phu = $content;  //xử ly thẻ p có nội dung trước img
@@ -196,11 +198,13 @@ $instant_article= '<!doctype html>
                 $p_trc[]=$text2;
                 $text3 =  $this->GetBetween('<p>'.$text,'">','</p>');
                 $p_sau[]=$text3;
+                
             }
            
              $content_phu = str_ireplace('<p>'.$text.'</p>','',$content_phu);          
         }   
 
+        // dd($p_trc);
         foreach ($p_trc as $key => $item) {
             $content = str_ireplace('<p>'.$item,'<p>'.$item.'</p>',$content);
         }
@@ -208,13 +212,13 @@ $instant_article= '<!doctype html>
             $content = str_ireplace('">'.$item.'</p>','"><p>'.$item.'</p>',$content);
         }
         ////
-
+         // dd($content);
         $content = str_ireplace('<p></p>','',$content);
         // $content = str_ireplace('<p><img','<img',$content);
         // $content = str_ireplace('></p>','>',$content);  
         
         // var_dump($content);
-        //  dd($content);
+         dd($content);
         ///// anh cover
         $content_phu = $content;
         for ($i=0; $i<60; $i++) { 
