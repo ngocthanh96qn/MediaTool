@@ -3,7 +3,7 @@
 <div class="container mt-5">
   <div class="row" style="background: #2EFEC8; border-radius:5px">
     <div class="col-xl-5 offset-xl-4 mt-5 mb-5">
-      <form action="{{route('render')}}" method="POST" >
+      <form action="{{route('postArticle')}}" method="POST" >
         @csrf
         <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
         <div class="form-check">
