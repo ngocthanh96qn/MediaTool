@@ -363,4 +363,12 @@ $article =
     // dd($response->json());
                
     }
+     public function updateIa($id){
+        $id_page = '104651187547290';
+        $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='. $this->token);
+        $token_page = $response->json()['access_token'];
+        $IA = InfoArticle::find($id);
+        $response = Http::get('https://graph.facebook.com/'.$IA->id_status.'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
+        dd($response->json());
+    }
 }
