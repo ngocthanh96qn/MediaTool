@@ -6,18 +6,15 @@
       <form action="{{route('postArticle')}}" method="POST" >
         @csrf
         <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="select_web" id="exampleRadios1" value="1" checked>
+        @foreach ($list_web as $element)
+           <div class="form-check">
+          <input class="form-check-input" type="radio" name="id_configWeb" id="exampleRadios1" value={{$element->id}} checked>
           <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios1">
-            WEB: 24h.xaluanvn.net - PAGE: Đọc tin nhanh
+            WEB: {{$element->web_name}} - PAGE: {{$element->page_name}}
           </label>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" >
-          <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios2">
-            WEB: 24h.xaluanvn.net - PAGE: Đọc tin nhanh
-          </label>
-        </div>
+        @endforeach
+       
         <div class="form-group text-center mt-3">
           <label style="color: red; font-size: 20px; font-weight: 900"> NHẬP ID BÀI VIẾT </label>
           <input type="text" class="form-control" name="post_id" >
@@ -51,9 +48,10 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">ID</th>
+            <th scope="col">STT</th>
             <th scope="col">Web</th>
             <th scope="col">Tiêu đề</th>
+            <th scope="col">Link</th>
             <th scope="col">Trạng thái IA</th>
             <th scope="col">Update IA</th>
             <th scope="col">Update bài viết</th>
@@ -61,15 +59,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>3456</td>
-            <td>xemnhanh.info</td>
-            <td ><p class="d-inline-block text-truncate" style="max-width: 150px;">nội dung xxxxxxxxxxxxxxxxxxxxxxx aaaaaaaaaaaaaaaaaaaa</p></td>
-            <td> Đang xử lí </td>
-            <td><a href="#" class="btn btn-success">Update</a></td>
+
+          @foreach ($listView as $key=>$Article)
+            <tr>
+            <td>{{$key+1}}</td>
+            <td>{{$Article['nameWeb']}}</td>
+            <td ><p class="d-inline-block text-truncate" style="max-width: 150px;">{{html_entity_decode($Article['title'])}}</p></td>
+            <td><a href="{{$Article['url']}}" target="_blank" >Xem</a></td>
+            <td>{{$Article['status']}} </td>
+            @php
+              $url = str_replace("/","-",$Article['url']);
+            @endphp
+            <td><a href="{{ route('updateIa',['url'=>$url]) }}" class="btn btn-success">Update</a></td>
             <td><a href="#" class="btn btn-primary">Update</a></td>
             <td><a href="#" class="btn btn-danger">Delete</a></td>
           </tr>
+          @endforeach
 
         </tbody>
       </table>

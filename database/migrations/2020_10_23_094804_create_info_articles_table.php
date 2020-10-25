@@ -14,11 +14,10 @@ class CreateInfoArticlesTable extends Migration
     public function up()
     {
         Schema::create('info_articles', function (Blueprint $table) {
-            $table->id();
-            $table->string('id_web');
+            $table->id();          
             $table->string('url');
             $table->string('id_import');
-            $table->string('id_article');
+            $table->string('status');
             $table->timestamps();
         });
     }

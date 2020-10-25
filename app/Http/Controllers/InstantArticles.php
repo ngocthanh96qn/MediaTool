@@ -19,88 +19,20 @@ use Facebook\InstantArticles\Elements\Ad;
 use Facebook\InstantArticles\Elements\Analytics;
 use Facebook\InstantArticles\Elements\Footer;
 use Illuminate\Support\Facades\Http;
+use App\ConfigTool;
+use App\ConfigWeb;
+use App\infoArticle;
+
 class InstantArticles extends Controller
 
 {
-    private $access_token;
-    private $this->id_page;   
+    private $access_token;   
     public function __construct(){
-        $this->access_token = 'EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
-        $this->id_page ='104651187547290';
+        // $this->access_token = 'EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
+        $this->access_token = ConfigTool::all()[0]->access_token;
     }
 
-   
-    public function fixDraft(Request $request){
-
-
-        $seclect_web = $request->select_web;
-        $post_id = $request->post_id;
-
-        switch ($seclect_web) {
-            case '1': //xemnhanh.info
-            $domain = 'https://xemnhanh.info';
-            break;
-            case '2': //news.xemnhanh.info                       
-            $domain = 'http://news.xemnhanh.info';
-            break;
-            default:
-                # code...
-            break;
-        }       
-
-        $response = Http::get('https://graph.facebook.com/'.$this->id_page.'?fields=access_token&access_token='. $access_token);
-        $token_page = $response->json()['access_token'];
-        //lay id bai thong qua url
-        $response = Http::get("https://graph.facebook.com?id=https://xemnhanh.info/tin-tuc/".$post_id."&fields=instant_article&access_token=".$token_page);
-        $id_article = ($response->json()["instant_article"]["id"]);
-        //xoa bai
-        $response = Http::delete("https://graph.facebook.com/".$id_article."?access_token=".$token_page);
-        ///delete  xong
-
-
-        $instant_article= '<!doctype html>
-        <html lang="vi" prefix="op: http://media.facebook.com/op#"><head>
-        <link rel="canonical" href="'.$domain.'/tin-tuc/'.$post_id.'"/>
-        <meta charset="utf-8"/>
-        <meta property="op:generator" content="facebook-instant-articles-sdk-php"/>
-        <meta property="op:generator:version" content="1.10.0"/>
-        <meta property="op:markup_version" content="v1.0"/>
-        <meta property="op:generator:application" content="facebook-instant-articles-wp"/>
-        <meta property="op:generator:application:version" content="4.2.1"/>
-        <meta property="op:generator:transformer" content="facebook-instant-articles-sdk-php"/>
-        <meta property="op:generator:transformer:version" content="1.10.0"/>
-        <meta property="fb:article_style" content="default"/>
-        <meta property="fb:use_automatic_ad_placement" content="enable=true ad_density=default"/>
-        </head>
-        <body>
-        <article>
-        <header>
-        <figure>   
-        <img src="https://xemnhanh.info/wp-content/uploads/2020/10/photo1603254911388-16032549115691428201932.jpg"/>
-        </figure>
-        <h1>Update</h1>
-        <time class="op-published" datetime="2020-10-22T14:15:45+07:00">October 22nd, 2:15pm</time>
-        <time class="op-modified" datetime="2020-10-23T10:39:30+07:00">October 23rd, 10:39am</time>
-        <address><a>Biên tập Viên</a>- Người biên soạn bài viết - </address>
-        <figure class="op-ad"><iframe src="https://www.facebook.com/adnw_request?placement=389373932077460_389373962077457&adtype=banner300x250" width="300" height="250"></iframe>
-        </figure>
-        </header>
-        <p>Update</p>
-        </article>
-        </body>
-        </html>
-        ';
-        $response = Http::post('https://graph.facebook.com/'.$this->id_page.'/instant_articles', [
-            'access_token' => $token_page,
-            'html_source' => $instant_article,
-            'published'=> 'true',
-            'development_mode'=> 'false',
-
-        ]);
-        return view('pages.home',['notice'=>'Đợi 1 phút rồi úp lại bài bị lỗi']);
-
-    }
-    public function GetBetween($content,$start,$end){
+        public function GetBetween($content,$start,$end){
         $r = explode($start, $content);
         if (isset($r[1])){
             $r = explode($end, $r[1]);
@@ -110,40 +42,45 @@ class InstantArticles extends Controller
     }
 
     public function postArticle(Request $request){
-        $seclect_web = $request->toArray()['select_web'];
-        $post_id = $request->toArray()['post_id'];
-        switch ($seclect_web) {
-            case '1': //xemnhanh.info
-            $this->id_page = '104651187547290';
-            $id_ads = '389373932077460_389373962077457'; 
-            $id_analytics = '"UA-178506002-1"';
-            $domain = '24h.xaluanvn.net';
-            $add_title = '';
-            break;
-            case '2': //news.xemnhanh.info
-            $this->id_page = '104651187547290';
-            $id_ads = '2438328233140160_2438328266473490';
-            $id_analytics = '"UA-178506002-2"';
-            $domain = '24h.xaluanvn.net';
+        
+        $id_configWeb = $request->id_configWeb;
+        $post_id = $request->post_id;
+        $configWeb = ConfigWeb::find($id_configWeb);
+        $id_page =  $configWeb->id_page;
+        $id_ads =  $configWeb->id_ads;
+        $id_analytics = $configWeb->id_analytics;
+        $domain = $configWeb->domain;
+        
+        // switch ($seclect_web) {
+        //     case '1': //xemnhanh.info
+        //     $this->id_page = '104651187547290';
+        //     $id_ads = '389373932077460_389373962077457'; 
+        //     $id_analytics = '"UA-178506002-1"';
+        //     $domain = '24h.xaluanvn.net';
+        //     $add_title = '';
+        //     break;
+        //     case '2': //news.xemnhanh.info
+        //     $this->id_page = '104651187547290';
+        //     $id_ads = '2438328233140160_2438328266473490';
+        //     $id_analytics = '"UA-178506002-2"';
+        //     $domain = '24h.xaluanvn.net';
 
-            $add_title = ' - News';
-            break;
-            default:
-                # code...
-            break;
-        }
+        //     $add_title = ' - News';
+        //     break;
+        //     default:
+        //         # code...
+        //     break;
+        // }
        
         
         $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
         $response = Http::get($link);
-        //  dd($response->json());
         if(isset($response->json()['code']))
         {
             dd($response->json()['message']);
         }
         $CanonicalUrl =  $response->json()['link'];
         $title = $response->json()['title']['rendered'];
-        $title= $title.$add_title; 
         $time = $response->json()['date'];
         $time = str_replace("T"," ",$time);
         $time_current =  date("Y-m-d h:i:s");
@@ -336,27 +273,99 @@ class InstantArticles extends Controller
         // dd($instant_article);
 
 
-         $response = Http::get('https://graph.facebook.com/'.$this->id_page.'?fields=access_token&access_token='. $access_token);
+         $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='.$this->access_token);
          $token_page = $response->json()['access_token'];
-         $response = Http::post('https://graph.facebook.com/'.$this->id_page.'/instant_articles', [
+         $response = Http::post('https://graph.facebook.com/'.$id_page.'/instant_articles', [
+            'access_token' => $token_page,
+            'html_source' => $instant_article,
+            'published'=> 'true',
+            'development_mode'=> 'false',
+        ]);
+         $id_import = $response->json()['id'];
+        $status =  $this->getStatus($id_page,$id_import);
+        //lưu vao database
+        infoArticle::updateOrCreate(['url'=> $CanonicalUrl],['id_import'=>$id_import, 'status'=>$status['status']]);
+        ///
+         return redirect()->route('pagehome');
+
+     } 
+
+     public function getStatus($id_page,$id_import){
+        $Main = new Main; 
+        $token_page = $Main->getAccessPage($id_page);
+        $response = Http::get('https://graph.facebook.com/'.$id_import.'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
+        return $response->json();
+     }
+
+    public function fixDraft(Request $request){
+
+
+        $seclect_web = $request->select_web;
+        $post_id = $request->post_id;
+
+        switch ($seclect_web) {
+            case '1': //xemnhanh.info
+            $domain = 'https://xemnhanh.info';
+            break;
+            case '2': //news.xemnhanh.info                       
+            $domain = 'http://news.xemnhanh.info';
+            break;
+            default:
+                # code...
+            break;
+        }       
+
+        $response = Http::get('https://graph.facebook.com/'.$this->id_page.'?fields=access_token&access_token='. $access_token);
+        $token_page = $response->json()['access_token'];
+        //lay id bai thong qua url
+        $response = Http::get("https://graph.facebook.com?id=https://xemnhanh.info/tin-tuc/".$post_id."&fields=instant_article&access_token=".$token_page);
+        $id_article = ($response->json()["instant_article"]["id"]);
+        //xoa bai
+        $response = Http::delete("https://graph.facebook.com/".$id_article."?access_token=".$token_page);
+        ///delete  xong
+
+
+        $instant_article= '<!doctype html>
+        <html lang="vi" prefix="op: http://media.facebook.com/op#"><head>
+        <link rel="canonical" href="'.$domain.'/tin-tuc/'.$post_id.'"/>
+        <meta charset="utf-8"/>
+        <meta property="op:generator" content="facebook-instant-articles-sdk-php"/>
+        <meta property="op:generator:version" content="1.10.0"/>
+        <meta property="op:markup_version" content="v1.0"/>
+        <meta property="op:generator:application" content="facebook-instant-articles-wp"/>
+        <meta property="op:generator:application:version" content="4.2.1"/>
+        <meta property="op:generator:transformer" content="facebook-instant-articles-sdk-php"/>
+        <meta property="op:generator:transformer:version" content="1.10.0"/>
+        <meta property="fb:article_style" content="default"/>
+        <meta property="fb:use_automatic_ad_placement" content="enable=true ad_density=default"/>
+        </head>
+        <body>
+        <article>
+        <header>
+        <figure>   
+        <img src="https://xemnhanh.info/wp-content/uploads/2020/10/photo1603254911388-16032549115691428201932.jpg"/>
+        </figure>
+        <h1>Update</h1>
+        <time class="op-published" datetime="2020-10-22T14:15:45+07:00">October 22nd, 2:15pm</time>
+        <time class="op-modified" datetime="2020-10-23T10:39:30+07:00">October 23rd, 10:39am</time>
+        <address><a>Biên tập Viên</a>- Người biên soạn bài viết - </address>
+        <figure class="op-ad"><iframe src="https://www.facebook.com/adnw_request?placement=389373932077460_389373962077457&adtype=banner300x250" width="300" height="250"></iframe>
+        </figure>
+        </header>
+        <p>Update</p>
+        </article>
+        </body>
+        </html>
+        ';
+        $response = Http::post('https://graph.facebook.com/'.$this->id_page.'/instant_articles', [
             'access_token' => $token_page,
             'html_source' => $instant_article,
             'published'=> 'true',
             'development_mode'=> 'false',
 
         ]);
-         return redirect()->route('pagehome');
-    // var_dump($response->json());
-    // $response = Http::get('https://graph.facebook.com/'.$response->json()['id'].'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
-    // dd($response->json());
+        return view('pages.home',['notice'=>'Đợi 1 phút rồi úp lại bài bị lỗi']);
 
-     }
-     public function updateIa($id){
-      
-        $response = Http::get('https://graph.facebook.com/'.$this->id_page.'?fields=access_token&access_token='. $this->access_token);
-        $token_page = $response->json()['access_token'];
-        $IA = InfoArticle::find($id);
-        $response = Http::get('https://graph.facebook.com/'.$IA->id_status.'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
-        dd($response->json());
     }
+
 }

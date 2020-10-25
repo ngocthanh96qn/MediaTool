@@ -20,10 +20,9 @@ Route::get('admin/web/delete/{id}','ConfigToolController@deleteConfigWeb')->name
 
 //Các route chính//
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('pagehome');
+Route::get('/','Main@home')->name('pagehome');
 Route::post('/post/article', 'InstantArticles@postArticle')->name('postArticle'); //chức năng đăng bài
+Route::get('/update/ia/{url}','Main@updateIa')->name('updateIa');
 ///////////
 Route::get('/fix', function () {
     return view('pages.fixDraft');
