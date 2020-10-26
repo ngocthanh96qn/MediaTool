@@ -45,33 +45,17 @@ class InstantArticles extends Controller
         
         $id_configWeb = $request->id_configWeb;
         $post_id = $request->post_id;
+        $this->createPost($id_configWeb,$post_id);
+        return redirect()->route('pagehome');
+    }
+
+     public function createPost($id_configWeb,$post_id)
+    {
         $configWeb = ConfigWeb::find($id_configWeb);
         $id_page =  $configWeb->id_page;
         $id_ads =  $configWeb->id_ads;
         $id_analytics = $configWeb->id_analytics;
         $domain = $configWeb->domain;
-        
-        // switch ($seclect_web) {
-        //     case '1': //xemnhanh.info
-        //     $this->id_page = '104651187547290';
-        //     $id_ads = '389373932077460_389373962077457'; 
-        //     $id_analytics = '"UA-178506002-1"';
-        //     $domain = '24h.xaluanvn.net';
-        //     $add_title = '';
-        //     break;
-        //     case '2': //news.xemnhanh.info
-        //     $this->id_page = '104651187547290';
-        //     $id_ads = '2438328233140160_2438328266473490';
-        //     $id_analytics = '"UA-178506002-2"';
-        //     $domain = '24h.xaluanvn.net';
-
-        //     $add_title = ' - News';
-        //     break;
-        //     default:
-        //         # code...
-        //     break;
-        // }
-       
         
         $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
         $response = Http::get($link);
@@ -281,12 +265,12 @@ class InstantArticles extends Controller
             'published'=> 'true',
             'development_mode'=> 'false',
         ]);
-         $id_import = $response->json()['id'];
+        $id_import = $response->json()['id'];
         $status =  $this->getStatus($id_page,$id_import);
         //lưu vao database
         infoArticle::updateOrCreate(['url'=> $CanonicalUrl],['id_import'=>$id_import, 'status'=>$status['status']]);
         ///
-         return redirect()->route('pagehome');
+         return ;
 
      } 
 
@@ -296,6 +280,8 @@ class InstantArticles extends Controller
         $response = Http::get('https://graph.facebook.com/'.$id_import.'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
         return $response->json();
      }
+
+
 
     public function fixDraft(Request $request){
 

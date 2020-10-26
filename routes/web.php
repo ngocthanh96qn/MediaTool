@@ -23,6 +23,7 @@ Route::get('admin/web/delete/{id}','ConfigToolController@deleteConfigWeb')->name
 Route::get('/','Main@home')->name('pagehome');
 Route::post('/post/article', 'InstantArticles@postArticle')->name('postArticle'); //chức năng đăng bài
 Route::get('/update/ia/{url}','Main@updateIa')->name('updateIa');
+Route::get('/update/updateArticle/{url}','Main@updateArticle')->name('updateArticle');
 ///////////
 Route::get('/fix', function () {
     return view('pages.fixDraft');

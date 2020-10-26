@@ -71,7 +71,7 @@
               $url = str_replace("/","-",$Article['url']);
             @endphp
             <td><a href="{{ route('updateIa',['url'=>$url]) }}" class="btn btn-success">Update</a></td>
-            <td><a href="#" class="btn btn-primary">Update</a></td>
+            <td><a href="{{ route('updateArticle',['url'=>$url]) }}" class="btn btn-primary">Update</a></td>
             <td><a href="#" class="btn btn-danger">Delete</a></td>
           </tr>
           @endforeach

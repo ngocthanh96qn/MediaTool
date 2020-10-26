@@ -61,6 +61,16 @@ class Main extends Controller
     	
     	return redirect()->route('pagehome');
     }
+    public function updateArticle($url){
+    	$url=$url.'#';
+    	for($i=0;$i<5;$i++){
+    		$result = $this->getBetween($url,"--","-");
+    	$url = str_replace($result.'-','',$url);
+    	}
+    	$idArticle = $this->getBetween($url,"--","#");
+    	$instantArticle = new InstantArticles;
+    	dd($idArticle);
+    }
 
     public function getAccessPage($idPage){
     	$access_token = ConfigTool::find(1)->access_token;
