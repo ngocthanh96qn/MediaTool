@@ -15,7 +15,7 @@
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" >
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios2">
-                WEB: news.xemnhanh.info - PAGE: xem tin nhanh
+                WEB: xehay9.com - PAGE: Tin-tức-News
               </label>
             </div>
                 <div class="form-group text-center mt-3">

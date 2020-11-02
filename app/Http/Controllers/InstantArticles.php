@@ -133,12 +133,12 @@ $instant_article= '<!doctype html>
                 $add_title = '';
                 break;
             case '2': //news.xemnhanh.info
-                $id_page = '100917907925908';
-                $id_ads = '2438328233140160_2438328266473490';
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_396750158007440';
                 $id_analytics = '"UA-178506002-2"';
-                $domain = 'news.xemnhanh.info';
+                $domain = 'xehay9.com';
 
-                $add_title = ' - News';
+                $add_title = '';
                 break;
             default:
                 # code...
@@ -221,7 +221,7 @@ $instant_article= '<!doctype html>
          // dd($content);
         ///// anh cover
         $content_phu = $content;
-        for ($i=0; $i<60; $i++) { 
+        for ($i=0; $i<70; $i++) { 
             $img[$i] =  $this->GetBetween($content_phu,'<img','>');
             $content_phu = str_ireplace('<img'.$img[$i],'',$content_phu);
         }
@@ -261,18 +261,20 @@ $instant_article= '<!doctype html>
   $title_analytic = "replace_title";
         //khai bao analytics
         $Analytics = "<script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        var analyticID = $id_analytics ;
-        ga('create',analyticID, 'auto');
-        ga('require', 'displayfeatures');
-        ga('set', 'campaignSource', 'Facebook');
-        ga('set', 'campaignMedium', 'Social Instant Article');
-        ga('set', 'title', 'IA:".$title_analytic."' );
-        ga('send', 'pageview'); 
-      </script>";
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', $id_analytics , 'auto');
+  ga('require', 'displayfeatures');
+  ga('set', 'campaignSource', 'Facebook');
+  ga('set', 'campaignMedium', 'Social Instant Article');
+  ga('set', 'title', 'IA: '+ia_document.title);
+  ga('send', 'pageview');
+ 
+</script>";
+
         $document = new \DOMDocument();
         $fragment = $document->createDocumentFragment();
         $fragment->appendXML($Analytics);
@@ -345,8 +347,11 @@ $article =
        $instant_article = str_replace("<h1>\n","<h1>",$instant_article); 
        $instant_article = str_replace("<iframe>","\n<iframe>",$instant_article);
        $instant_article = str_replace("<img","\n       <img",$instant_article); 
+       $title = html_entity_decode($title);
        $instant_article = str_replace("replace_title",$title,$instant_article); 
        $instant_article = str_replace("&&","&",$instant_article); 
+       $instant_article = str_replace("<p><figure>","<figure>",$instant_article);
+       $instant_article = str_replace("</figure>\n</p>","</figure>",$instant_article);
 
        // var_dump($instant_article );
         // dd($instant_article);
