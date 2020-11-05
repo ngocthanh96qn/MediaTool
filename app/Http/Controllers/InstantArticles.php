@@ -26,19 +26,12 @@ class InstantArticles extends Controller
         $id_page = '100917907925908';
         $access_token ='EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
 
-        $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='. $access_token);
-        $token_page = $response->json()['access_token'];
-        // dd($token_page);
-       $url = 'https://xemnhanh.info/tin-tuc/3881';
+       
 
-// $id = "2451211261855299";
-// $response = Http::get('https://graph.facebook.com/'.$id.'?fields=html_source,status&access_token='.$token_page);
- // $response = Http::get("https://graph.facebook.com/394666631565104?fields=errors,html_source,instant_article,status&access_token=".$token_page);
-        // $response = Http::get("https://graph.facebook.com/100917907925908/instant_articles?access_token=".$token_page);
+       
 
-       $response = Http::get("https://graph.facebook.com?id=".$url."&fields=instant_article&access_token=".$token_page);
-        dd($response->json());
     }
+
     public function fixDraft(Request $request){
         
 
@@ -47,23 +40,27 @@ class InstantArticles extends Controller
 
         switch ($seclect_web) {
             case '1': //xemnhanh.info
-                $domain = 'https://xemnhanh.info';
+                $domain = 'https://xemnhanh.info/tin-tuc';
+                $id_page = '100917907925908';
+               
                 break;
-            case '2': //news.xemnhanh.info                       
-                $domain = 'http://news.xemnhanh.info';
+            case '2': //xehay                      
+                $domain = 'http://xehay9.com/news';
+                $id_page = '104177407595851';
+                
                 break;
             default:
                 # code...
                 break;
         }
 
-        $id_page = '100917907925908';
+        
         $access_token ='EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
 
         $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='. $access_token);
         $token_page = $response->json()['access_token'];
         //lay id bai thong qua url
-         $response = Http::get("https://graph.facebook.com?id=https://xemnhanh.info/tin-tuc/".$post_id."&fields=instant_article&access_token=".$token_page);
+         $response = Http::get("https://graph.facebook.com?id=".$domain."/".$post_id."&fields=instant_article&access_token=".$token_page);
         $id_article = ($response->json()["instant_article"]["id"]);
         //xoa bai
          $response = Http::delete("https://graph.facebook.com/".$id_article."?access_token=".$token_page);
@@ -160,8 +157,27 @@ $instant_article= '<!doctype html>
         $time = str_replace("T"," ",$time);
         $time_current =  date("Y-m-d h:i:s");
         $content = $response->json()['content']['rendered'];
-        $content =  strip_tags($content, '<p> <img>'); //chi nhận thẻ p và img
+        $content =  strip_tags($content, '<p> <img> <iframe>'); //chi nhận thẻ p và img
 
+        $link = array();
+        for ($i=0; $i <5; $i++){
+            $iframe='';
+            $iframe =  $this->GetBetween($content,'<iframe','</iframe>');
+            $link[$i] =  $this->GetBetween($iframe,'daᴛa-src=','?');
+            
+            $content = str_ireplace('<iframe'.$iframe.'</iframe>',$link[$i],$content);  
+        }
+        // dd($link);
+        foreach ($link as $key => $value) {
+            if($value!='false'){
+               $tempLink = '<figure class="op-interactive">
+               <iframe width="560" height="315" src='.$value.'"></iframe>
+               </figure>';
+               $content = str_ireplace($value,$tempLink,$content);
+           }
+
+       }
+   
         for ($i=0; $i < 20 ; $i++) { 
             $p_class =  $this->GetBetween($content,'<p class','>');
             $content = str_ireplace('<p class'.$p_class,'<p',$content);    
@@ -231,6 +247,9 @@ $instant_article= '<!doctype html>
             if(strpos("data-src",$in_img)==true) {
                 $src = $this->GetBetween($in_img,'data-src="','"');
             }
+            elseif(strpos("daᴛa-src",$in_img)==true) {
+                $src = $this->GetBetween($in_img,'daᴛa-src="','"');
+            }
             else {
                 $src = $this->GetBetween($in_img,'src="','"');
                 
@@ -260,24 +279,25 @@ $instant_article= '<!doctype html>
         /////
   $title_analytic = "replace_title";
         //khai bao analytics
-        $Analytics = "<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
- 
-  ga('create', $id_analytics , 'auto');
-  ga('require', 'displayfeatures');
-  ga('set', 'campaignSource', 'Facebook');
-  ga('set', 'campaignMedium', 'Social Instant Article');
-  ga('set', 'title', 'IA: '+ia_document.title);
-  ga('send', 'pageview');
- 
-</script>";
+        $analytics = 'var qParams= new URL(ia_document.shareURL).searchParams; var source = qParams["utm_source"]; var medium = qParams["utm_medium"] ;
+      var url_tid = (new URL(window.location)).searchParams.get("tid");
+      var analyticID = "ha";
+      document.title = "IA"+((url_tid>0)?url_tid:"")+": " +ia_document.title+"";
+      (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+  ga("create","UA-178506002-1", "auto"); 
+  ga("send", "pageview");
+  ga("send", "screenview", { "appName": "FB Intant Article", "appVersion": location.hostname, "screenName": "FBia: "+location.hostname});
+  ga("create", "UA-178506002-1", "auto", "clientTracker"); 
+  ga("clientTracker.send", "pageview");  
+  ga("clientTracker.send", "screenview", {"appName": "FB Intant Article", "appVersion": location.hostname ,"screenName": "FBia: "+location.hostname});';
+
+ $buildAnalytics = '<script> replace_analytics </script>';
 
         $document = new \DOMDocument();
         $fragment = $document->createDocumentFragment();
-        $fragment->appendXML($Analytics);
+        $fragment->appendXML($buildAnalytics);
 
     
 $article =
@@ -347,11 +367,13 @@ $article =
        $instant_article = str_replace("<h1>\n","<h1>",$instant_article); 
        $instant_article = str_replace("<iframe>","\n<iframe>",$instant_article);
        $instant_article = str_replace("<img","\n       <img",$instant_article); 
-       $title = html_entity_decode($title);
+       // $title = html_entity_decode($title);
        $instant_article = str_replace("replace_title",$title,$instant_article); 
        $instant_article = str_replace("&&","&",$instant_article); 
-       $instant_article = str_replace("<p><figure>","<figure>",$instant_article);
+       $instant_article = str_replace("<p><figure","<figure",$instant_article);
        $instant_article = str_replace("</figure>\n</p>","</figure>",$instant_article);
+
+       $instant_article = str_replace("replace_analytics ",$analytics,$instant_article);
 
        // var_dump($instant_article );
         // dd($instant_article);
