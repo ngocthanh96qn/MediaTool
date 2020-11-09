@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInfoArticlesTable extends Migration
+class CreateConfigToolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateInfoArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('info_articles', function (Blueprint $table) {
-            $table->id();          
-            $table->string('url');
-            $table->string('id_import');
-            $table->string('status');
+        Schema::create('config_tools', function (Blueprint $table) {
+            $table->id();
+            $table->string('access_token');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateInfoArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('info_articles');
+        Schema::dropIfExists('config_tools');
     }
 }

@@ -10,6 +10,8 @@
  
      <!-- Styles -->
      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     {{-- style customer --}}
+     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     @section('content')

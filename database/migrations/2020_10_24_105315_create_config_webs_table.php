@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInfoArticlesTable extends Migration
+class CreateConfigWebsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateInfoArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('info_articles', function (Blueprint $table) {
-            $table->id();          
-            $table->string('url');
-            $table->string('id_import');
-            $table->string('status');
+        Schema::create('config_webs', function (Blueprint $table) {
+            $table->id();
+            $table->string('id_page');
+            $table->string('page_name');
+            $table->string('domain');
+            $table->string('web_name');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateInfoArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('info_articles');
+        Schema::dropIfExists('config_webs');
     }
 }
