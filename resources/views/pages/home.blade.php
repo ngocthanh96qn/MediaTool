@@ -14,8 +14,26 @@
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" >
-              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios2">
+              <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios2">
+                WEB: news.xemnhanh.info - PAGE: xem nhanh plus
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios3">
                 WEB: xehay9.com - PAGE: Tin-tức-News
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios4">
+                WEB: phim.xehay9.com - PAGE: Tin-tức-News
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5" >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios5">
+                WEB: docnhanh.online - PAGE: Xem Nhanh Amazing
               </label>
             </div>
                 <div class="form-group text-center mt-3">
@@ -24,6 +42,9 @@
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary " style="background: #FFBF00; color:#8A0808"> Đăng IA </button>
+                </div>
+                <div class="text-center mt-5">
+                  <div id="scriptquote"></div>
                 </div>
                 
         </form>
@@ -42,6 +63,28 @@
         </div>
     </div>
     
-  
+  <style>
+#scriptquote{color: #5af; font-weight: bold; background:#ecf0f1; text-align: center;}
+#scriptquote:hover{color:#2ecc71}
+</style>
+
+<script type="text/Javascript">
+function random_quote()
+{ 
+quote_arr= new Array();
+quote_arr[1]="Có một thứ tiền không thể mua được. Đó là sự nghèo khó!";
+quote_arr[2]="Em cũng chỉ là con gái thôi. Buồn là ăn không ăn là buồn.";
+quote_arr[3]="Cuộc sống vốn ngắn ngủi, vì vậy bạn hãy luôn cười khi còn đủ răng.";
+quote_arr[4]="Tình yêu sẽ mãi mãi trường tồn, chỉ có người yêu là thay đổi.";
+quote_arr[5]="Cứ ăn chơi cho hết đời trai trẻ. Rồi âm thầm, lặng lẽ đạp xích lô.";
+quote_arr[6]="Ông trời cho tôi gương mặt xinh xắn, đáng yêu. Nhưng ông trời lại lấy đi người công nhận nó.";
+
+ 
+arr_leng  = quote_arr.length-1;
+random_arr= Math.floor((Math.random()*arr_leng)+1);
+document.getElementById('scriptquote').innerHTML=quote_arr[random_arr];
+}  
+setInterval(random_quote, 4000);//thay 3000 mili giây thành thời gian hiện thị 1 trích dẫn 
+</script>
 </div>
 @endsection

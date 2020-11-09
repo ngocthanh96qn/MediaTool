@@ -129,11 +129,34 @@ $instant_article= '<!doctype html>
                 $domain = 'xemnhanh.info';
                 $add_title = '';
                 break;
-            case '2': //news.xemnhanh.info
+             case '2': //news.xemnhanh.info
+                $id_page = '100917907925908';
+                $id_ads = '389373932077460_389373962077457';
+                $id_analytics = '"UA-178506002-3"';
+                $domain = 'news.xemnhanh.info';
+                $add_title = ' - News';
+                break;
+            case '3': 
                 $id_page = '104177407595851';
                 $id_ads = '396750111340778_396750158007440';
                 $id_analytics = '"UA-178506002-2"';
                 $domain = 'xehay9.com';
+
+                $add_title = '';
+                break;
+            case '4': 
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_396750158007440';
+                $id_analytics = '"UA-178506002-2"';
+                $domain ='phim.xehay9.com';
+
+                $add_title = '';
+                break;
+            case '5': 
+                $id_page = '110192396985449';
+                $id_ads = '2381870108784563_2447486002222973';
+                $id_analytics = '"UA-92226347-28"';
+                $domain ='docnhanh.online';
 
                 $add_title = '';
                 break;
@@ -279,17 +302,29 @@ $instant_article= '<!doctype html>
         /////
   $title_analytic = "replace_title";
         //khai bao analytics
-        $analytics = 'var qParams= new URL(ia_document.shareURL).searchParams; var source = qParams["utm_source"]; var medium = qParams["utm_medium"] ;
+  $analytics = "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', ".$id_analytics.", 'auto');
+  ga('require', 'displayfeatures');
+  ga('set', 'campaignSource', 'Facebook');
+  ga('set', 'campaignMedium', 'Social Instant Article');
+  ga('set', 'title', 'IA: '+ia_document.title);
+  ga('send', 'pageview');";
+
+        $analytics_kdung = 'var qParams= new URL(ia_document.shareURL).searchParams; var source = qParams["utm_source"]; var medium = qParams["utm_medium"] ;
       var url_tid = (new URL(window.location)).searchParams.get("tid");
       var analyticID = "ha";
       document.title = "IA"+((url_tid>0)?url_tid:"")+": " +ia_document.title+"";
       (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-  ga("create","UA-178506002-1", "auto"); 
+  ga("create",'.$id_analytics.', "auto"); 
   ga("send", "pageview");
   ga("send", "screenview", { "appName": "FB Intant Article", "appVersion": location.hostname, "screenName": "FBia: "+location.hostname});
-  ga("create", "UA-178506002-1", "auto", "clientTracker"); 
+  ga("create", '.$id_analytics.', "auto", "clientTracker"); 
   ga("clientTracker.send", "pageview");  
   ga("clientTracker.send", "screenview", {"appName": "FB Intant Article", "appVersion": location.hostname ,"screenName": "FBia: "+location.hostname});';
 
