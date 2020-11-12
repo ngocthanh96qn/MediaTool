@@ -7,33 +7,39 @@
             @csrf
             <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios1" value="1" checked>
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios1" value="1"@if ($value==1){{"checked"}} @endif>
               <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios1">
                 WEB: xemnhanh.info - PAGE: xem nhanh plus
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" >
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" @if ($value==2){{"checked"}} @endif>
               <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios2">
                 WEB: news.xemnhanh.info - PAGE: xem nhanh plus
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" >
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" @if ($value==3){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios3">
                 WEB: xehay9.com - PAGE: Tin-tức-News
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" >
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" @if ($value==4){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios4">
                 WEB: phim.xehay9.com - PAGE: Tin-tức-News
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5" >
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5" @if ($value==5){{"checked"}} @endif >
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios5">
                 WEB: docnhanh.online - PAGE: Xem Nhanh Amazing
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios6" value="6" @if ($value==6){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios6">
+                WEB: khelsanchar.com - PAGE: Unique Nepal
               </label>
             </div>
                 <div class="form-group text-center mt-3">
@@ -69,22 +75,27 @@
 </style>
 
 <script type="text/Javascript">
+
 function random_quote()
 { 
 quote_arr= new Array();
-quote_arr[1]="Có một thứ tiền không thể mua được. Đó là sự nghèo khó!";
-quote_arr[2]="Em cũng chỉ là con gái thôi. Buồn là ăn không ăn là buồn.";
-quote_arr[3]="Cuộc sống vốn ngắn ngủi, vì vậy bạn hãy luôn cười khi còn đủ răng.";
-quote_arr[4]="Tình yêu sẽ mãi mãi trường tồn, chỉ có người yêu là thay đổi.";
+quote_arr[1]="Cuộc sống chỉ mang đến cho bạn 10% cơ hội, 90% còn lại là cách mà bạn phản ứng với nó.";
+quote_arr[2]="Hãy tìm kiếm 3 sở thích của bạn: Một cái để kiếm tiền, một cái để bạn phát triển và một cái để sáng tạo";
+quote_arr[3]="Người thành công là khi mọi người được thông báo nghỉ nhưng mình vẫn vác thân đi làm. -- Thúy MediaNet";
+quote_arr[4]="Không có gì là không thể với một người luôn biết cố gắng";
 quote_arr[5]="Cứ ăn chơi cho hết đời trai trẻ. Rồi âm thầm, lặng lẽ đạp xích lô.";
-quote_arr[6]="Ông trời cho tôi gương mặt xinh xắn, đáng yêu. Nhưng ông trời lại lấy đi người công nhận nó.";
-
+quote_arr[6]="Không chuẩn bị nghĩa là bạn đã sẵn sàng cho việc thất bại";
+quote_arr[7]="Hãy luyện tập như thể bạn chưa bao giờ chiến thắng. Hãy hành động như thể chưa bao giờ bạn thất bại";
+quote_arr[8]="Chỉ cần bạn không dừng lại thì việc bạn tiến chậm cũng không là vấn đề";
+quote_arr[9]="Bất kỳ ai cố gắng dìm bạn xuống thì họ đều thua kém bạn";
+quote_arr[10]="Hãy không ngừng học hỏi. Nếu bạn là người thông minh nhất trong phòng thì thực sự là bạn đã ở nhầm chỗ";
  
 arr_leng  = quote_arr.length-1;
 random_arr= Math.floor((Math.random()*arr_leng)+1);
 document.getElementById('scriptquote').innerHTML=quote_arr[random_arr];
 }  
 setInterval(random_quote, 4000);//thay 3000 mili giây thành thời gian hiện thị 1 trích dẫn 
+
 </script>
 </div>
 @endsection

@@ -146,17 +146,25 @@ $instant_article= '<!doctype html>
                 break;
             case '4': 
                 $id_page = '104177407595851';
-                $id_ads = '396750111340778_396750158007440';
-                $id_analytics = '"UA-178506002-2"';
+                $id_ads = '396750111340778_408296313519491';
+                $id_analytics = '"UA-178506002-4"';
                 $domain ='phim.xehay9.com';
 
-                $add_title = '';
+                $add_title = ' - Tin Điện Ảnh';
                 break;
             case '5': 
                 $id_page = '110192396985449';
                 $id_ads = '2381870108784563_2447486002222973';
                 $id_analytics = '"UA-92226347-28"';
                 $domain ='docnhanh.online';
+
+                $add_title = '';
+                break;
+            case '6': 
+                $id_page = '103002484495757';
+                $id_ads = '455786635402042_455786685402037';
+                $id_analytics = '"UA-92226347-33"';
+                $domain ='khelsanchar.com';
 
                 $add_title = '';
                 break;
@@ -423,7 +431,7 @@ $article =
         'development_mode'=> 'false',
         
     ]);
-    return redirect()->route('pagehome');
+    return view('pages.home',['value'=>$seclect_web]);
     // var_dump($response->json());
     // $response = Http::get('https://graph.facebook.com/'.$response->json()['id'].'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
     // dd($response->json());

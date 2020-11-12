@@ -18,7 +18,7 @@ Route::get('/admin', function () {
 });
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('pages.home',['value'=>'']);
 })->name('pagehome');
 Route::post('/render', 'InstantArticles@test')->name('render');
 /////////////////
