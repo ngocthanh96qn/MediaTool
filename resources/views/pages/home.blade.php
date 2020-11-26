@@ -1,45 +1,67 @@
 @extends('pages.layouts')
 @section('content')
 <div class="container mt-5">
-    <div class="row" style="background: #2EFEC8; border-radius:5px">
+    <div class="row" style="background-color: #DBA901; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to bottom right, #0B4C5F, yellow); border-radius:5px">
         <div class="col-xl-5 offset-xl-4 mt-5 mb-5">
         <form action="{{route('render')}}" method="POST" >
             @csrf
-            <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
+            <h3 class="text-center" style="color: #8A2908; font-weight: 900"> CHỌN WEB </h3>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios1" value="1"@if ($value==1){{"checked"}} @endif>
               <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios1">
-                WEB: xemnhanh.info - PAGE: xem nhanh plus
+              Quỳnh-Trinh : xemnhanh.info - PAGE: xem nhanh plus
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" @if ($value==2){{"checked"}} @endif>
               <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios2">
-                WEB: news.xemnhanh.info - PAGE: xem nhanh plus
+                Phương : xemnhanh.info - PAGE: xem nhanh plus
               </label>
             </div>
-            <div class="form-check">
+
+            {{-- <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" @if ($value==3){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios3">
-                WEB: xehay9.com - PAGE: Tin-tức-News
+                Thúy : xehay9.com  - PAGE: Tin-tức-News
+              </label>
+            </div> --}}
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5" @if ($value==5){{"checked"}} @endif>
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios5">
+                Thúy : phim.xehay9.com  - PAGE: Tin-tức-News
               </label>
             </div>
-            <div class="form-check">
+
+           {{--  <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" @if ($value==4){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios4">
-                WEB: phim.xehay9.com - PAGE: Tin-tức-News
+                Quyên : xehay9.com - PAGE: Tin-tức-News
+              </label>
+            </div> --}}
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios9" value="9" @if ($value==9){{"checked"}} @endif>
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios9">
+                Quyên : phim.xem.plus - PAGE: Cuộc Sống Muôn Màu
               </label>
             </div>
+
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5" @if ($value==5){{"checked"}} @endif >
-              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios5">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios6" value="6" @if ($value==6){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios6">
                 WEB: docnhanh.online - PAGE: Xem Nhanh Amazing
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios6" value="6" @if ($value==6){{"checked"}} @endif >
-              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios6">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios7" value="7" @if ($value==7){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios7">
                 WEB: khelsanchar.com - PAGE: Unique Nepal
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios8" value="8" @if ($value==8){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios8">
+                WEB: xem.plus - PAGE: Cuộc Sống Muôn Màu
               </label>
             </div>
                 <div class="form-group text-center mt-3">
@@ -50,10 +72,16 @@
                   <button type="submit" class="btn btn-primary " style="background: #FFBF00; color:#8A0808"> Đăng IA </button>
                 </div>
                 <div class="text-center mt-5">
-                  <div id="scriptquote"></div>
+                  <div id="scriptquote" style="background-color: #DBA901; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to bottom right, #0B4C5F, #886A08); border-radius:5px"></div>
                 </div>
                 
         </form>
+        @if (isset($status)&&($status=='success'))
+          <script type="text/javascript">
+        setTimeout(function(){ alert('Thành Công!'); },100);
+          </script>
+        @endif
         @if (isset($notice))
         <div class="alert alert-danger mt-5">
           <strong>Chú Ý !! </strong> {{$notice}}
@@ -70,7 +98,7 @@
     </div>
     
   <style>
-#scriptquote{color: #5af; font-weight: bold; background:#ecf0f1; text-align: center;}
+#scriptquote{color: #F6E3CE; font-weight: bold; background:#ecf0f1; text-align: center;}
 #scriptquote:hover{color:#2ecc71}
 </style>
 
@@ -88,7 +116,7 @@ quote_arr[6]="Không chuẩn bị nghĩa là bạn đã sẵn sàng cho việc t
 quote_arr[7]="Hãy luyện tập như thể bạn chưa bao giờ chiến thắng. Hãy hành động như thể chưa bao giờ bạn thất bại";
 quote_arr[8]="Chỉ cần bạn không dừng lại thì việc bạn tiến chậm cũng không là vấn đề";
 quote_arr[9]="Bất kỳ ai cố gắng dìm bạn xuống thì họ đều thua kém bạn";
-quote_arr[10]="Hãy không ngừng học hỏi. Nếu bạn là người thông minh nhất trong phòng thì thực sự là bạn đã ở nhầm chỗ";
+quote_arr[10]="Rượu bất khả ép. Ép bất khả từ. Từ từ bữa khác ta uống tiếp, hôm nay em/anh uống đủ rồi -- Thúy đô trưởng MediaNet";
  
 arr_leng  = quote_arr.length-1;
 random_arr= Math.floor((Math.random()*arr_leng)+1);

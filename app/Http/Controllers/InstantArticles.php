@@ -39,15 +39,75 @@ class InstantArticles extends Controller
         $post_id = $request->post_id;
 
         switch ($seclect_web) {
-            case '1': //xemnhanh.info
-                $domain = 'https://xemnhanh.info/tin-tuc';
+             case '1': //xemnhanh.info quynh trinh
                 $id_page = '100917907925908';
-               
+                $id_ads = '389373932077460_389373962077457'; 
+                $id_analytics = '"UA-178506002-1"';
+                $domain = 'xemnhanh.info';
+                $add_title = '';
                 break;
-            case '2': //xehay                      
-                $domain = 'http://xehay9.com/news';
+             case '2': //xemnhanh.info phuong
+                $id_page = '100917907925908';
+                $id_ads = '389373932077460_397637001251153';
+                $id_analytics = '"UA-178506002-3"';
+                $domain = 'xemnhanh.info';
+                $add_title = '';
+                break;
+            case '3': //thúy
                 $id_page = '104177407595851';
-                
+                $id_ads = '396750111340778_396750158007440';
+                $id_analytics = '"UA-178506002-2"';
+                $domain = 'xehay9.com';
+
+                $add_title = '';
+                break;
+             case '5': //thúy
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_396750158007440';
+                $id_analytics = '"UA-178506002-2"';
+                $domain = 'phim.xehay9.com';
+
+                $add_title = '';
+                break;
+            case '4': //quyên
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_408296313519491';
+                $id_analytics = '"UA-178506002-4"';
+                $domain ='xehay9.com';
+
+                $add_title = '';
+                break;
+            case '9': //quyên
+                $id_page = '107780813896602';
+                $id_ads = '1000034943798352_1007363053065541';
+                $id_analytics = '"UA-178506002-4"';
+                $domain ='phim.xem.plus';
+
+                $add_title = '';
+                break;
+            case '6': 
+                $id_page = '110192396985449';
+                $id_ads = '2381870108784563_2447486002222973';
+                $id_analytics = '"UA-92226347-28"';
+                $domain ='docnhanh.online';
+
+                $add_title = '';
+                break;
+            case '7': 
+                $id_page = '103002484495757';
+                $id_ads = '455786635402042_455786685402037';
+                $id_analytics = '"UA-92226347-33"';
+                $domain ='khelsanchar.com';
+
+                $add_title = '';
+                break;
+             case '8': 
+                $id_page = '107780813896602';
+                $id_ads = '1000034943798352_1000034977131682';
+                $id_analytics = '"UA-92226347-18"';
+                $domain ='xem.plus';
+
+                $add_title = '';
                 break;
             default:
                 # code...
@@ -60,45 +120,23 @@ class InstantArticles extends Controller
         $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='. $access_token);
         $token_page = $response->json()['access_token'];
         //lay id bai thong qua url
-         $response = Http::get("https://graph.facebook.com?id=".$domain."/".$post_id."&fields=instant_article&access_token=".$token_page);
+        $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+        $response = Http::get($link);
+        if(isset($response->json()['code']))
+        {
+            dd($response->json()['message']);
+        }
+        $url =  $response->json()['link'];
+
+         $response = Http::get("https://graph.facebook.com?id=".$url."&fields=instant_article&access_token=".$token_page);
+         $instant_article = $response->json()['instant_article']['html_source'];
+          $instant_article = preg_replace('/<h1>(.*?)<\/h1>/is', '<h1> Updating - '.$post_id.' </h1>', $instant_article);
+          $content = $this->GetBetween($instant_article,'</header>','<figure class="op-tracker">');
+          $instant_article = str_replace($content, "\n<p> Updating </p>\n", $instant_article);
         $id_article = ($response->json()["instant_article"]["id"]);
         //xoa bai
          $response = Http::delete("https://graph.facebook.com/".$id_article."?access_token=".$token_page);
         ///delete  xong
-
-
-$instant_article= '<!doctype html>
-<html lang="vi" prefix="op: http://media.facebook.com/op#"><head>
-<link rel="canonical" href="'.$domain.'/tin-tuc/'.$post_id.'"/>
-  <meta charset="utf-8"/>
-  <meta property="op:generator" content="facebook-instant-articles-sdk-php"/>
-  <meta property="op:generator:version" content="1.10.0"/>
-  <meta property="op:markup_version" content="v1.0"/>
-  <meta property="op:generator:application" content="facebook-instant-articles-wp"/>
-  <meta property="op:generator:application:version" content="4.2.1"/>
-  <meta property="op:generator:transformer" content="facebook-instant-articles-sdk-php"/>
-  <meta property="op:generator:transformer:version" content="1.10.0"/>
-  <meta property="fb:article_style" content="default"/>
-  <meta property="fb:use_automatic_ad_placement" content="enable=true ad_density=default"/>
-</head>
-<body>
-<article>
-<header>
-<figure>   
-       <img src="https://xemnhanh.info/wp-content/uploads/2020/10/photo1603254911388-16032549115691428201932.jpg"/>
-</figure>
-<h1>Update</h1>
-<time class="op-published" datetime="2020-10-22T14:15:45+07:00">October 22nd, 2:15pm</time>
-<time class="op-modified" datetime="2020-10-23T10:39:30+07:00">October 23rd, 10:39am</time>
-<address><a>Biên tập Viên</a>- Người biên soạn bài viết - </address>
-<figure class="op-ad"><iframe src="https://www.facebook.com/adnw_request?placement=389373932077460_389373962077457&adtype=banner300x250" width="300" height="250"></iframe>
-</figure>
-</header>
-<p>Update</p>
-</article>
-</body>
-</html>
-';
          $response = Http::post('https://graph.facebook.com/'.$id_page.'/instant_articles', [
         'access_token' => $token_page,
         'html_source' => $instant_article,
@@ -106,7 +144,7 @@ $instant_article= '<!doctype html>
         'development_mode'=> 'false',
         
     ]);
-          return view('pages.home',['notice'=>'Đợi 1 phút rồi úp lại bài bị lỗi']);
+          return back()->with('alert','Xong B3');
             
     }
     function GetBetween($content,$start,$end){
@@ -122,21 +160,21 @@ $instant_article= '<!doctype html>
         $seclect_web = $request->toArray()['select_web'];
         $post_id = $request->toArray()['post_id'];
         switch ($seclect_web) {
-            case '1': //xemnhanh.info
+            case '1': //xemnhanh.info quynh trinh
                 $id_page = '100917907925908';
                 $id_ads = '389373932077460_389373962077457'; 
                 $id_analytics = '"UA-178506002-1"';
                 $domain = 'xemnhanh.info';
                 $add_title = '';
                 break;
-             case '2': //news.xemnhanh.info
+             case '2': //xemnhanh.info phuong
                 $id_page = '100917907925908';
-                $id_ads = '389373932077460_389373962077457';
+                $id_ads = '389373932077460_397637001251153';
                 $id_analytics = '"UA-178506002-3"';
-                $domain = 'news.xemnhanh.info';
-                $add_title = ' - News';
+                $domain = 'xemnhanh.info';
+                $add_title = '';
                 break;
-            case '3': 
+            case '3': //thúy
                 $id_page = '104177407595851';
                 $id_ads = '396750111340778_396750158007440';
                 $id_analytics = '"UA-178506002-2"';
@@ -144,15 +182,31 @@ $instant_article= '<!doctype html>
 
                 $add_title = '';
                 break;
-            case '4': 
+             case '5': //thúy
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_396750158007440';
+                $id_analytics = '"UA-178506002-2"';
+                $domain = 'phim.xehay9.com';
+
+                $add_title = '';
+                break;
+            case '4': //quyên
                 $id_page = '104177407595851';
                 $id_ads = '396750111340778_408296313519491';
                 $id_analytics = '"UA-178506002-4"';
-                $domain ='phim.xehay9.com';
+                $domain ='xehay9.com';
 
-                $add_title = ' - Tin Điện Ảnh';
+                $add_title = '';
                 break;
-            case '5': 
+			case '9': //quyên
+                $id_page = '107780813896602';
+                $id_ads = '1000034943798352_1007363053065541';
+                $id_analytics = '"UA-178506002-4"';
+                $domain ='phim.xem.plus';
+
+                $add_title = '';
+                break;
+            case '6': 
                 $id_page = '110192396985449';
                 $id_ads = '2381870108784563_2447486002222973';
                 $id_analytics = '"UA-92226347-28"';
@@ -160,11 +214,19 @@ $instant_article= '<!doctype html>
 
                 $add_title = '';
                 break;
-            case '6': 
+            case '7': 
                 $id_page = '103002484495757';
                 $id_ads = '455786635402042_455786685402037';
                 $id_analytics = '"UA-92226347-33"';
                 $domain ='khelsanchar.com';
+
+                $add_title = '';
+                break;
+             case '8': 
+                $id_page = '107780813896602';
+                $id_ads = '1000034943798352_1000034977131682';
+                $id_analytics = '"UA-92226347-18"';
+                $domain ='xem.plus';
 
                 $add_title = '';
                 break;
@@ -272,18 +334,38 @@ $instant_article= '<!doctype html>
             $img[$i] =  $this->GetBetween($content_phu,'<img','>');
             $content_phu = str_ireplace('<img'.$img[$i],'',$content_phu);
         }
-        // dd($img);
+
+        foreach ($img as $key => $value) {
+            
+            $pos = strpos($value,'src="daᴛa');
+            if ($pos !== false) {
+            $img[$key] = 'false';
+             $content = str_ireplace('<img'.$value.'>','',$content);
+            } 
+
+            // $poss = strpos($value,'aria-d&#x0065;');
+            // if ($poss !== false) {
+            // $img[$key] = 'false';
+            // $content = str_ireplace('<img'.$value.'>','',$content);
+            // } 
+
+        }
+      // dd($img);
         foreach ($img as $key => $in_img) {
             
-            if(strpos("data-src",$in_img)==true) {
+            if(strpos($in_img,"data-src")==true) {
                 $src = $this->GetBetween($in_img,'data-src="','"');
+
+                
             }
-            elseif(strpos("daᴛa-src",$in_img)==true) {
+            elseif(strpos($in_img,"daᴛa-src")==true) {
                 $src = $this->GetBetween($in_img,'daᴛa-src="','"');
+
+                
             }
             else {
                 $src = $this->GetBetween($in_img,'src="','"');
-                
+                 
             }
             
             $content = str_ireplace('<img'.$in_img,'<figure><img'.$in_img,$content);
@@ -291,7 +373,7 @@ $instant_article= '<!doctype html>
             $content = str_ireplace('<img'.$in_img,'<img src="'.$src.'"/',$content);
         }
        
-        // dd($content);
+       
     
         if(isset($response->json()['_links']['wp:featuredmedia']))
         {
@@ -431,7 +513,7 @@ $article =
         'development_mode'=> 'false',
         
     ]);
-    return view('pages.home',['value'=>$seclect_web]);
+    return view('pages.home',['value'=>$seclect_web,'status'=>'success']);
     // var_dump($response->json());
     // $response = Http::get('https://graph.facebook.com/'.$response->json()['id'].'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
     // dd($response->json());
