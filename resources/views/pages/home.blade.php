@@ -16,29 +16,29 @@
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" @if ($value==2){{"checked"}} @endif>
               <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios2">
-                Phương : xemnhanh.info - PAGE: xem nhanh plus
+                Phương : showbiz.xemnhanh.info - PAGE: xem nhanh plus
               </label>
             </div>
 
-            {{-- <div class="form-check">
+            <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" @if ($value==3){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios3">
-                Thúy : xehay9.com  - PAGE: Tin-tức-News
+                Thúy : xehay9.com  - PAGE: Load-News
               </label>
-            </div> --}}
+            </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5" @if ($value==5){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios5">
-                Thúy : phim.xehay9.com  - PAGE: Tin-tức-News
+                Thúy : phim.xehay9.com  - PAGE: Load-News
               </label>
             </div>
 
-           {{--  <div class="form-check">
+            <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" @if ($value==4){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios4">
-                Quyên : xehay9.com - PAGE: Tin-tức-News
+                Hưng-Hoang-Nho : ia.xehay9.com - PAGE: Xem-tin-Nhanh
               </label>
-            </div> --}}
+            </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios9" value="9" @if ($value==9){{"checked"}} @endif>
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios9">
@@ -62,6 +62,30 @@
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios8" value="8" @if ($value==8){{"checked"}} @endif >
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios8">
                 WEB: xem.plus - PAGE: Cuộc Sống Muôn Màu
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios10" value="10" @if ($value==10){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios10">
+                Đông- Thailand WEB: ia.khelsanchar.com - PAGE: Unique Nepal
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios11" value="11" @if ($value==11){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios11">
+                Hưng - Arap WEB: news.docnhanh.online - PAGE: Kassy News
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios12" value="12" @if ($value==12){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios12">
+                 WEB: tv.xehay9.com - PAGE: Load-News
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios13" value="13" @if ($value==13){{"checked"}} @endif >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios13">
+                 WEB: ia.live48today.com - PAGE: Media-News-Today-Live
               </label>
             </div>
                 <div class="form-group text-center mt-3">
@@ -107,22 +131,22 @@
 function random_quote()
 { 
 quote_arr= new Array();
-quote_arr[1]="Cuộc sống chỉ mang đến cho bạn 10% cơ hội, 90% còn lại là cách mà bạn phản ứng với nó.";
-quote_arr[2]="Hãy tìm kiếm 3 sở thích của bạn: Một cái để kiếm tiền, một cái để bạn phát triển và một cái để sáng tạo";
-quote_arr[3]="Người thành công là khi mọi người được thông báo nghỉ nhưng mình vẫn vác thân đi làm. -- Thúy MediaNet";
-quote_arr[4]="Không có gì là không thể với một người luôn biết cố gắng";
-quote_arr[5]="Cứ ăn chơi cho hết đời trai trẻ. Rồi âm thầm, lặng lẽ đạp xích lô.";
-quote_arr[6]="Không chuẩn bị nghĩa là bạn đã sẵn sàng cho việc thất bại";
-quote_arr[7]="Hãy luyện tập như thể bạn chưa bao giờ chiến thắng. Hãy hành động như thể chưa bao giờ bạn thất bại";
-quote_arr[8]="Chỉ cần bạn không dừng lại thì việc bạn tiến chậm cũng không là vấn đề";
-quote_arr[9]="Bất kỳ ai cố gắng dìm bạn xuống thì họ đều thua kém bạn";
-quote_arr[10]="Rượu bất khả ép. Ép bất khả từ. Từ từ bữa khác ta uống tiếp, hôm nay em/anh uống đủ rồi -- Thúy đô trưởng MediaNet";
+quote_arr[1]="“Tôi không tiếc về những việc mình đã làm, tôi chỉ tiếc những việc mình đã không làm khi có cơ hội”";
+quote_arr[2]="“Thách thức là điều làm cho cuộc sống trở nên thú vị và vượt qua chúng là những gì tạo nên ý nghĩa cuộc sống.”";
+quote_arr[3]="“Để thành công, khao khát thành công của bạn phải lớn hơn nỗi sợ thất bại”";
+quote_arr[4]="“Tôi biết ơn những người đã nói không với mình. Nhờ họ mà tôi tự mình làm lấy mọi thứ.”";
+quote_arr[5]="“Cuộc đời ngắn ngủi, hãy sống trọn từng phút giây. Tình yêu khan hiếm, hãy biết nắm lấy. Giận dữ là không tốt, hãy loại bỏ nó. Những kỉ niệm luôn ngọt ngào, hãy trân trọng chúng.”";
+quote_arr[6]="“Khi bạn nói “Thật là khó”, điều đó thực sự có nghĩa rằng “Tôi không đủ mạnh mẽ để đấu tranh vì nó”. Ngừng ngay việc kêu ca. Hãy suy nghĩ tích cực.”";
+quote_arr[7]="“Đừng lo lắng về thất bại, hãy lo về những cơ hội bạn bỏ lỡ khi bạn thậm chí không hề cố gắng.”";
+quote_arr[8]="“Thất bại lớn nhất bạn có thể gặp phải trong đời là mắc phải sai lầm không bao giờ cố gắng.”";
+quote_arr[9]="“Chờ đợi một điều bạn biết có thể chẳng bao giờ xảy ra thật không dễ gì, nhưng việc từ bỏ khi bạn biết đó là những gì bạn muốn thậm chí còn khó khăn hơn.”";
+quote_arr[10]="“Quên đi tất cả những lí do không thể và chỉ tin vào một lí do cho thấy rằng điều đó là có thể”";
  
 arr_leng  = quote_arr.length-1;
 random_arr= Math.floor((Math.random()*arr_leng)+1);
 document.getElementById('scriptquote').innerHTML=quote_arr[random_arr];
 }  
-setInterval(random_quote, 4000);//thay 3000 mili giây thành thời gian hiện thị 1 trích dẫn 
+setInterval(random_quote, 10000);//thay 3000 mili giây thành thời gian hiện thị 1 trích dẫn 
 
 </script>
 </div>

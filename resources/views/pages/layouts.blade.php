@@ -11,7 +11,7 @@
      <!-- Styles -->
      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: url('{{ asset('image/cover.jpg') }}'); background-repeat: no-repeat; background-size: 100%;">
     @section('content')
         
     @show

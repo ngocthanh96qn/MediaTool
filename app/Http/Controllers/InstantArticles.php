@@ -24,11 +24,7 @@ class InstantArticles extends Controller
     public function index(){
          
         $id_page = '100917907925908';
-        $access_token ='EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
-
-       
-
-       
+        $access_token ='EAAKGZAc6bPdUBAOR89MAcYIO4jZBEgEqeQH4EHLfZCn331TjZCGKoengS7ZCngRmRBkBY7O6pmlkZC8Xr0A4r78ZA2tdu8KpWRPmRsCk6yRfVdYTBdzqABVbjpnS6MYhXkxxaSVYg2hlE7mYLB0kGqlMZCiVujLIj9iZCO1HqH1JqpQZDZD'; 
 
     }
 
@@ -37,6 +33,8 @@ class InstantArticles extends Controller
 
         $seclect_web = $request->select_web;
         $post_id = $request->post_id;
+        $access_token_Thanh = 'EAAJZB7ROL2ToBAJZA07SEsoZA4nttyZCZCDWsmMunLb9ltRCvAjYIm4aj5reYpbp5lhC0qXFql2wjpvihwcpjXgYvMcg9X4n94zWp85eZBCISrXils3SBEkHgiLMeZCw8nNK20ClMqZBHrF1Tx8u4uk7dYD9FpKSLBWhyn0dpdM4FAZDZD';
+        $access_token_Ms = 'EAAUmHGYtS3gBAMLEAELN0MZCpUJZBHE1b5K5xIybUmzZBRxmcWwDte7dZBJtZBXqT9ePDSpcvhWKPQxelDZCrrsNZAYReNfrGHbZCSZAG9IhkXbNTKjC7B1ZC5qmJDvvqOb3JYVpX4DcaZA4nBPba1FXTOowjAQPUNCOGtvjBKOcZBGhSiZAdO6tF5gmG';
 
         switch ($seclect_web) {
              case '1': //xemnhanh.info quynh trinh
@@ -45,13 +43,17 @@ class InstantArticles extends Controller
                 $id_analytics = '"UA-178506002-1"';
                 $domain = 'xemnhanh.info';
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
              case '2': //xemnhanh.info phuong
                 $id_page = '100917907925908';
                 $id_ads = '389373932077460_397637001251153';
                 $id_analytics = '"UA-178506002-3"';
-                $domain = 'xemnhanh.info';
+                $domain = 'showbiz.xemnhanh.info';
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '3': //thúy
                 $id_page = '104177407595851';
@@ -60,6 +62,8 @@ class InstantArticles extends Controller
                 $domain = 'xehay9.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
              case '5': //thúy
                 $id_page = '104177407595851';
@@ -68,14 +72,18 @@ class InstantArticles extends Controller
                 $domain = 'phim.xehay9.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '4': //quyên
-                $id_page = '104177407595851';
-                $id_ads = '396750111340778_408296313519491';
-                $id_analytics = '"UA-178506002-4"';
-                $domain ='xehay9.com';
+                $id_page = '105677884186090';
+                $id_ads = '2438328233140160_2515689868737329';
+                $id_analytics = '"UA-178506002-5"';
+                $domain ='ia.xehay9.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '9': //quyên
                 $id_page = '107780813896602';
@@ -84,6 +92,8 @@ class InstantArticles extends Controller
                 $domain ='phim.xem.plus';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '6': 
                 $id_page = '110192396985449';
@@ -92,6 +102,8 @@ class InstantArticles extends Controller
                 $domain ='docnhanh.online';
 
                 $add_title = '';
+                $link = 'https://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '7': 
                 $id_page = '103002484495757';
@@ -100,6 +112,8 @@ class InstantArticles extends Controller
                 $domain ='khelsanchar.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
              case '8': 
                 $id_page = '107780813896602';
@@ -108,6 +122,48 @@ class InstantArticles extends Controller
                 $domain ='xem.plus';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
+                break;
+            case '10': 
+                $id_page = '103002484495757';
+                $id_ads = '455786635402042_485271722453533';
+                $id_analytics = '"UA-178506002-6"';
+                $domain ='ia.khelsanchar.com';
+
+                $add_title = ' - Thai News';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
+                break;
+            case '11': 
+                $id_page = '1517678808276212';
+                $id_ads = '233175184933204_233175934933129';
+                $id_analytics = '"UA-178506002-7"';
+                $domain ='news.docnhanh.online';
+
+                $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Ms;
+                break;
+            case '12': //tv.xehay9.com
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_408296313519491';
+                $id_analytics = '"UA-178506002-4"';
+                $domain ='tv.xehay9.com';
+
+                $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
+                break;
+            case '13': //ia.live48today.com
+                $id_page = '101591151712044';
+                $id_ads = '438150034162041_438154427494935';
+                $id_analytics = '"UA-178506002-6"';
+                $domain ='ia.live48today.com';
+
+                $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             default:
                 # code...
@@ -115,12 +171,12 @@ class InstantArticles extends Controller
         }
 
         
-        $access_token ='EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
+        
 
         $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='. $access_token);
         $token_page = $response->json()['access_token'];
         //lay id bai thong qua url
-        $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+        
         $response = Http::get($link);
         if(isset($response->json()['code']))
         {
@@ -159,6 +215,8 @@ class InstantArticles extends Controller
     public function test(Request $request){
         $seclect_web = $request->toArray()['select_web'];
         $post_id = $request->toArray()['post_id'];
+        $access_token_Thanh = 'EAAJZB7ROL2ToBAJZA07SEsoZA4nttyZCZCDWsmMunLb9ltRCvAjYIm4aj5reYpbp5lhC0qXFql2wjpvihwcpjXgYvMcg9X4n94zWp85eZBCISrXils3SBEkHgiLMeZCw8nNK20ClMqZBHrF1Tx8u4uk7dYD9FpKSLBWhyn0dpdM4FAZDZD';
+        $access_token_Ms = 'EAAUmHGYtS3gBAMLEAELN0MZCpUJZBHE1b5K5xIybUmzZBRxmcWwDte7dZBJtZBXqT9ePDSpcvhWKPQxelDZCrrsNZAYReNfrGHbZCSZAG9IhkXbNTKjC7B1ZC5qmJDvvqOb3JYVpX4DcaZA4nBPba1FXTOowjAQPUNCOGtvjBKOcZBGhSiZAdO6tF5gmG';
         switch ($seclect_web) {
             case '1': //xemnhanh.info quynh trinh
                 $id_page = '100917907925908';
@@ -166,13 +224,17 @@ class InstantArticles extends Controller
                 $id_analytics = '"UA-178506002-1"';
                 $domain = 'xemnhanh.info';
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
              case '2': //xemnhanh.info phuong
                 $id_page = '100917907925908';
                 $id_ads = '389373932077460_397637001251153';
                 $id_analytics = '"UA-178506002-3"';
-                $domain = 'xemnhanh.info';
+                $domain = 'showbiz.xemnhanh.info';
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '3': //thúy
                 $id_page = '104177407595851';
@@ -181,6 +243,8 @@ class InstantArticles extends Controller
                 $domain = 'xehay9.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
              case '5': //thúy
                 $id_page = '104177407595851';
@@ -189,22 +253,28 @@ class InstantArticles extends Controller
                 $domain = 'phim.xehay9.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '4': //quyên
-                $id_page = '104177407595851';
-                $id_ads = '396750111340778_408296313519491';
-                $id_analytics = '"UA-178506002-4"';
-                $domain ='xehay9.com';
+                $id_page = '105677884186090';
+                $id_ads = '2438328233140160_2515689868737329';
+                $id_analytics = '"UA-178506002-5"';
+                $domain ='ia.xehay9.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
-			case '9': //quyên
+            case '9': //quyên
                 $id_page = '107780813896602';
                 $id_ads = '1000034943798352_1007363053065541';
                 $id_analytics = '"UA-178506002-4"';
                 $domain ='phim.xem.plus';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '6': 
                 $id_page = '110192396985449';
@@ -213,6 +283,8 @@ class InstantArticles extends Controller
                 $domain ='docnhanh.online';
 
                 $add_title = '';
+                $link = 'https://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             case '7': 
                 $id_page = '103002484495757';
@@ -221,6 +293,8 @@ class InstantArticles extends Controller
                 $domain ='khelsanchar.com';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
              case '8': 
                 $id_page = '107780813896602';
@@ -229,16 +303,56 @@ class InstantArticles extends Controller
                 $domain ='xem.plus';
 
                 $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
+                break;
+            case '10': 
+                $id_page = '103002484495757';
+                $id_ads = '455786635402042_485271722453533';
+                $id_analytics = '"UA-178506002-6"';
+                $domain ='ia.khelsanchar.com';
+
+                $add_title = ' - Thai News';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
+                break;
+            case '11': 
+                $id_page = '1517678808276212';
+                $id_ads = '233175184933204_233175934933129';
+                $id_analytics = '"UA-178506002-7"';
+                $domain ='news.docnhanh.online';
+
+                $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Ms;
+                break;
+            case '12': //tv.xehay9.com
+                $id_page = '104177407595851';
+                $id_ads = '396750111340778_408296313519491';
+                $id_analytics = '"UA-178506002-4"';
+                $domain ='tv.xehay9.com';
+
+                $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
+                break;
+            case '13': //ia.live48today.com
+                $id_page = '101591151712044';
+                $id_ads = '438150034162041_438154427494935';
+                $id_analytics = '"UA-178506002-6"';
+                $domain ='ia.live48today.com';
+
+                $add_title = '';
+                $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+                $access_token = $access_token_Thanh;
                 break;
             default:
                 # code...
                 break;
         }
-        $access_token = 'EAAKGZAc6bPdUBAMbanQGcPDWRV6mvEQ5RhxeoXqtglItvDHBkXbzIMkhr9kULpKT8frGcPACEQbZANCvCNHQeqdskO3yLNemZAzsZCv42ZBRXTVMIBCrC52HsOljV8LvXr7athFzmLS1kzRLTKGCU88PbhzPDYLV4tN888lRuxQZDZD';
         
-        $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
         $response = Http::get($link);
-        //  dd($response->json());
+         // dd($response->json());
         if(isset($response->json()['code']))
         {
             dd($response->json()['message']);
@@ -250,10 +364,13 @@ class InstantArticles extends Controller
         $time = str_replace("T"," ",$time);
         $time_current =  date("Y-m-d h:i:s");
         $content = $response->json()['content']['rendered'];
+
+        $content = str_replace("&#x0069;mg","img",$content);
+        
         $content =  strip_tags($content, '<p> <img> <iframe>'); //chi nhận thẻ p và img
 
         $link = array();
-        for ($i=0; $i <5; $i++){
+        for ($i=0; $i <150; $i++){
             $iframe='';
             $iframe =  $this->GetBetween($content,'<iframe','</iframe>');
             $link[$i] =  $this->GetBetween($iframe,'daᴛa-src=','?');
@@ -270,39 +387,40 @@ class InstantArticles extends Controller
            }
 
        }
-   
-        for ($i=0; $i < 20 ; $i++) { 
+
+        for ($i=0; $i < 150 ; $i++) { 
             $p_class =  $this->GetBetween($content,'<p class','>');
             $content = str_ireplace('<p class'.$p_class,'<p',$content);    
         }
 
-        for ($i=0; $i < 20 ; $i++) { 
+        for ($i=0; $i < 150 ; $i++) { 
             $p_class =  $this->GetBetween($content,'<p style','>');
             $content = str_ireplace('<p style'.$p_class,'<p',$content);    
         }
         
-        for ($i=0; $i < 20 ; $i++) { 
+        for ($i=0; $i < 150 ; $i++) { 
             $p_class =  $this->GetBetween($content,'<p daᴛa','>');   
             $content = str_ireplace('<p daᴛa'.$p_class,'<p',$content);    
         }
-        for ($i=0; $i < 20 ; $i++) { 
+        for ($i=0; $i < 150 ; $i++) { 
             $p_class =  $this->GetBetween($content,'<p data','>');
             $content = str_ireplace('<p data'.$p_class,'<p',$content);       
         }
-        for ($i=0; $i < 50 ; $i++) { 
+        for ($i=0; $i < 150 ; $i++) { 
             $p_img =  $this->GetBetween($content,'<p><img','</p>');
         $content = str_ireplace('<p><img'.$p_img.'</p>','<img'.$p_img,$content);
         }    
          // $content = str_ireplace("\n\n",'',$content);
          // $content = str_ireplace("</p>","</p>\n",$content);
-
+        // dd($content);
          $p_trc = [];
          $p_sau = [];
         $content_phu = $content;  //xử ly thẻ p có nội dung trước img
-        for ($i=0; $i < 50 ; $i++) { 
+        for ($i=0; $i < 150 ; $i++) { 
             $text =  $this->GetBetween($content_phu,'<p>','</p>');
             $pos = strpos($text, '<img');
             if ($pos !== false) {
+
                 $text2 =  $this->GetBetween('<p>'.$text,'<p>','<img');
                 $p_trc[]=$text2;
                 $text3 =  $this->GetBetween('<p>'.$text,'">','</p>');
@@ -313,24 +431,25 @@ class InstantArticles extends Controller
              $content_phu = str_ireplace('<p>'.$text.'</p>','',$content_phu);          
         }   
 
-        // dd($p_trc);
+        // dd($p_sau);
         foreach ($p_trc as $key => $item) {
-            $content = str_ireplace('<p>'.$item,'<p>'.$item.'</p>',$content);
+            if ($item!==" ") {
+               $content = str_ireplace('<p>'.$item,'<p>'.$item.'</p>',$content);
+            }
+            
         }
          foreach ($p_sau as $key => $item) {
             $content = str_ireplace('">'.$item.'</p>','"><p>'.$item.'</p>',$content);
         }
         ////
-         // dd($content);
         $content = str_ireplace('<p></p>','',$content);
         // $content = str_ireplace('<p><img','<img',$content);
         // $content = str_ireplace('></p>','>',$content);  
         
         // var_dump($content);
-         // dd($content);
         ///// anh cover
         $content_phu = $content;
-        for ($i=0; $i<70; $i++) { 
+        for ($i=0; $i<150; $i++) { 
             $img[$i] =  $this->GetBetween($content_phu,'<img','>');
             $content_phu = str_ireplace('<img'.$img[$i],'',$content_phu);
         }
@@ -351,6 +470,8 @@ class InstantArticles extends Controller
 
         }
       // dd($img);
+         $content = str_ireplace('<p> <img','<img',$content);
+         $content = str_ireplace('>  </p>','>',$content);
         foreach ($img as $key => $in_img) {
             
             if(strpos($in_img,"data-src")==true) {
@@ -443,8 +564,8 @@ $article =
                 )
                 ->addAuthor(
                     Author::create()
-                        ->withName('Biên tập Viên')
-                        ->withDescription('- Người biên soạn bài viết - ')
+                        ->withName('Admin')
+                        ->withDescription('- writer - ')
                 )                 
         )
         // Paragraph1
@@ -513,10 +634,11 @@ $article =
         'development_mode'=> 'false',
         
     ]);
+    // dd($response->json());
     return view('pages.home',['value'=>$seclect_web,'status'=>'success']);
     // var_dump($response->json());
     // $response = Http::get('https://graph.facebook.com/'.$response->json()['id'].'?fields=errors,html_source,instant_article,status&access_token='.$token_page);
     // dd($response->json());
                
     }
-}
+}   

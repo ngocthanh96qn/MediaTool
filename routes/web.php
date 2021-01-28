@@ -31,4 +31,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //////////////
 Route::get('/test', 'InstantArticles@index');
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 

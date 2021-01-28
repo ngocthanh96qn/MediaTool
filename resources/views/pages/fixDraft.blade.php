@@ -25,30 +25,30 @@
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2">
               <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios2">
-                Phương : xemnhanh.info - PAGE: xem nhanh plus
+                Phương : showbiz.xemnhanh.info - PAGE: xem nhanh plus
               </label>
             </div>
 
-            {{-- <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" @if ($value==3){{"checked"}} @endif>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios3" value="3" >
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios3">
-                Thúy : xehay9.com  - PAGE: Tin-tức-News
+                Thúy : xehay9.com  - PAGE: Load-News
               </label>
-            </div> --}}
+            </div>
 
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios5" value="5"> 
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios5">
-                Thúy : phim.xehay9.com  - PAGE: Tin-tức-News
+                Thúy : phim.xehay9.com  - PAGE: Load-News
               </label>
             </div>
 
-           {{--  <div class="form-check">
-              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" @if ($value==4){{"checked"}} @endif>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios4" value="4" >
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios4">
-                Quyên : xehay9.com - PAGE: Tin-tức-News
+                Hưng-Hoang-Nho : ia.xehay9.com - PAGE: Xem-tin-Nhanh
               </label>
-            </div> --}}
+            </div>
 
             <div class="form-check">
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios9" value="9"> 
@@ -73,6 +73,30 @@
               <input class="form-check-input" type="radio" name="select_web" id="exampleRadios8" value="8"> 
               <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios8">
                 WEB: xem.plus - PAGE: Cuộc Sống Muôn Màu
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios10" value="10"  >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios10">
+                Đông- Thailand WEB: ia.khelsanchar.com - PAGE: Unique Nepal
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios11" value="11"  >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios11">
+               Hưng - Arap WEB: news.docnhanh.online - PAGE: Kassy News
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios12" value="12" >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios12">
+                 WEB: tv.xehay9.com - PAGE: Load-News
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="select_web" id="exampleRadios13" value="13"  >
+              <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios13">
+                 WEB: ia.live48today.com - PAGE: Media-News-Today-Live
               </label>
             </div>
         <div class="form-group text-center mt-3">
