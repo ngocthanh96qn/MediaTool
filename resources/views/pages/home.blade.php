@@ -45,43 +45,7 @@
 </svg></a>
         </div>
   </div>
-  <div class="row">
-    <div class="col-xl-12  mt-5 mb-5">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Web</th>
-            <th scope="col">Tiêu đề</th>
-            <th scope="col">Link</th>
-            <th scope="col">Trạng thái IA</th>
-            <th scope="col">Update IA</th>
-            <th scope="col">Update bài viết</th>
-            <th scope="col">Xóa</th>
-          </tr>
-        </thead>
-        <tbody>
 
-          @foreach ($listView as $key=>$Article)
-            <tr>
-            <td>{{$key+1}}</td>
-            <td>{{$Article['nameWeb']}}</td>
-            <td ><p class="d-inline-block text-truncate" style="max-width: 150px;">{{html_entity_decode($Article['title'])}}</p></td>
-            <td><a href="{{$Article['url']}}" target="_blank" >Xem</a></td>
-            <td>{{$Article['status']}} </td>
-            @php
-              $url = str_replace("/","-",$Article['url']);
-            @endphp
-            <td><a href="{{ route('updateIa',['url'=>$url]) }}" class="btn btn-success">Update</a></td>
-            <td><a href="{{ route('updateArticle',['url'=>$url]) }}" class="btn btn-primary">Update</a></td>
-            <td><a href="#" class="btn btn-danger">Delete</a></td>
-          </tr>
-          @endforeach
-
-        </tbody>
-      </table>
-    </div>
-  </div>
 
 </div>
 @endsection

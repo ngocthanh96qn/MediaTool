@@ -28,12 +28,15 @@ class ConfigToolController extends Controller
     public function createToken(Request $request)
     {
     $data = $request->except('_token');
-    ConfigTool::truncate();
     ConfigTool::create($data);
     return redirect()->route('adminHome');
 
     }
-
+    public function deleteToken($id){
+        $row = ConfigTool::find($id);
+        $row->delete();
+        return redirect()->route('adminHome');
+    }
     public function createWeb(Request $request)
     {
      $data = $request->except('_token');

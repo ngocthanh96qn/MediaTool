@@ -15,25 +15,7 @@ class Main extends Controller
 
     public function home(){
     	$list_web = ConfigWeb::all();
-    	$listArticle = $this->getAllArtice($this->id_page);
-    	
-    	foreach ($listArticle['data'] as $key => $Article) {
-    		$url = $Article['canonical_url'];
-    		$infoArticle = infoArticle::where('url','=',$url)->get();
-    		if($infoArticle->toArray() == null)
-    		{
-    			$status = '--'	;
-    		}
-    		else {
-    			
-    			$status = $infoArticle[0]->status;
-    		}
-    		$id = $Article['id'];
-    		$title = $this->GetBetween($Article['html_source'],"<h1>","</h1>");
-    		$web =  $this->GetBetween($url,"//","/");
-    		$listView[] = ['title'=>$title ,'idFB'=>$id , 'nameWeb'=> $web , 'url'=>$url, 'status'=>$status] ;   		 
-    	}
-    	 return view('pages.home',['list_web'=>$list_web,'listView'=>$listView]);
+    	 return view('pages.home',['list_web'=>$list_web]);
     }
     public function GetBetween($content,$start,$end){
         $r = explode($start, $content);

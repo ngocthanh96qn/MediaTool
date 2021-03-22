@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ConfigTool extends Model
 {
     protected $fillable = [
-    	'access_token'
+    	'access_token','name'
     ];
 }

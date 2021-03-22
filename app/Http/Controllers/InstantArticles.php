@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Http;
 use App\ConfigTool;
 use App\ConfigWeb;
 use App\infoArticle;
+use App\TokenWeb;
 
 class InstantArticles extends Controller
 
@@ -52,7 +53,14 @@ class InstantArticles extends Controller
 
      public function createPost($id_configWeb,$post_id)
     {
+        
+        $id_token = TokenWeb::where('web_id','=',$id_configWeb)->get();
+        $id_token=$id_token[0]->token_id;
+        $access_token = ConfigTool::find($id_token);
+        $access_token = $access_token->access_token;
+        
         $configWeb = ConfigWeb::find($id_configWeb);
+
         $id_page =  $configWeb->id_page;
         $id_ads =  $configWeb->id_ads;
         $id_analytics = $configWeb->id_analytics;
@@ -103,8 +111,8 @@ class InstantArticles extends Controller
          $p_trc = [];
          $p_sau = [];
 
-            $content = str_ireplace('<p><img'.$p_img.'</p>','<img'.$p_img,$content);
-        }       
+        $content = str_ireplace('<p><img'.$p_img.'</p>','<img'.$p_img,$content);
+             
 
          // dd($content);
         $p_trc = [];
