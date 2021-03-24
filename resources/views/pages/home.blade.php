@@ -34,7 +34,7 @@
       </form>
       @if (isset($notice))
       <div class="alert alert-danger mt-5">
-        <strong>Chú Ý !! </strong> {{$notice}}
+        <strong> Chú Ý !! </strong> {{$notice}}
       </div>
       @endif
     </div>

@@ -17,7 +17,9 @@ Route::get('admintool','ConfigToolController@index' )->name('adminHome');  //v�
 Route::post('admin/token','ConfigToolController@createToken')->name('adminToken'); //tao token
 Route::post('admin/web','ConfigToolController@createWeb')->name('adminWeb');//tạo cài đặt web
 Route::get('admin/web/delete/{id}','ConfigToolController@deleteConfigWeb')->name('deleteConfigWeb');//tạo cài đặt web
-Route::get('admin/token/delete/{id}','ConfigToolController@deleteToken')->name('deleteToken');//xóa token 
+Route::post('admin/web/edit','ConfigToolController@editConfigWeb')->name('editConfigWeb');//tạo cài đặt web
+Route::post('admin/token/delete','ConfigToolController@deleteToken')->name('deleteToken');//xóa token 
+Route::post('admin/token/edit','ConfigToolController@editToken')->name('editToken');//sửa token 
 
 //Các route chính//
 
