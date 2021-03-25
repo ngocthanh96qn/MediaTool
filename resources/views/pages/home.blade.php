@@ -2,16 +2,17 @@
 @section('content')
 <div class="container mt-5">
 
-  <div class="row" style="background: #2EFEC8; border-radius:5px">
-    <div class="col-xl-5 offset-xl-4 mt-5 mb-5">
+  <div class="row" style="background-color: #DBA901; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to bottom right, #0B4C5F, yellow); border-radius:5px">
+    <div class="col-xl-7 offset-xl-2 mt-5 mb-5">
       <form action="{{route('postArticle')}}" method="POST" >
         @csrf
-        <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
+        <h3 class="text-center" style="color: #8A2908; font-weight: 900"> CHỌN WEB </h3>
         @foreach ($list_web as $key => $element)
            <div class="form-check" style="line-height: 60px">
           <input class="form-check-input" style="margin-top: 1.3rem;" type="radio" name="id_configWeb" id="exampleRadios{{$key}}" value={{$element->id}}>
-          <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px; " class="form-check-label" for="exampleRadios{{$key}}">
-            WEB: {{$element->web_name}} - PAGE: {{$element->page_name}}
+          <label  style="color: #3B0B0B; font-size: 20px; font-weight:5px"  class="form-check-label" for="exampleRadios{{$key}}">
+            {{$element->web_name}} - PAGE: {{$element->page_name}}
           </label>
         </div>
         @endforeach
@@ -25,19 +26,18 @@
 
         </div>
 
-        @if (isset($mes))
-        <div class="text-center mt-5" style="color:red; font-size: 20px">
-          <p>{{$mes}}</p>
-        </div>
-        @endif
-
       </form>
-      @if (isset($notice))
-      <div class="alert alert-danger mt-5">
-        <strong> Chú Ý !! </strong> {{$notice}}
-      </div>
-      @endif
+
+        @if (session('status'))
+          <script type="text/javascript">
+        setTimeout(function(){ alert('Thành Công!'); },100);
+          </script>
+        @endif
+        
+        
     </div>
+
+
     <div class="col-xl-2 offset-xl-1  mt-5 mb-5">
             <a href="{{ route('fixDraft') }}" class="btn btn-primary" style="padding: 15px;">Fix lỗi  
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-globe" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

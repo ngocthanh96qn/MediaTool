@@ -105,7 +105,7 @@
             </svg>
           </button></a>
           </td>
-          <td> <a href="#"><button class="btn btn-primary btn-xs delete_token" data-toggle="modal" data-target="#modal_delete_token" data-id ='{{$element->id}}'>Delete</button></a></td>
+          <td> <a href="#"><button class="btn btn-danger btn-xs delete_token" data-toggle="modal" data-target="#modal_delete_token" data-id ='{{$element->id}}'>Delete</button></a></td>
         </tr>
         @endforeach
 
@@ -120,6 +120,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">STT</th>
           <th scope="col">Name Token</th>
           <th scope="col">ID Trang</th>
           <th scope="col">Tên Trang</th>
@@ -132,8 +133,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($list_web as $element)
+        @foreach ($list_web as $key=>$element)
         <tr>
+          <td>{{$key+1}}</td>
           <td>{{$mangNameToken[$element->id]}}</td>
           <td>{{$element->id_page}}</td>
           <td>{{$element->page_name}}</td>
@@ -149,12 +151,38 @@
             </svg>
           </button></a>
           </td>
-          <td><a  href="{{ route('deleteConfigWeb',$element->id) }}">Delete</a></td>
+          <td> <a href="#"><button class="btn btn-danger btn-xs delete_web" data-toggle="modal" data-target="#modal_delete_web" data-id ='{{$element->id}}'>Delete</button></a></td>
+          {{-- <td><a  href="{{ route('deleteConfigWeb',$element->id) }}">Delete</a></td> --}}
         </tr>
         @endforeach
       </tbody>
     </table>
 
+  </div>
+</div>
+
+<div class="modal fade" id="modal_delete_web" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác Nhận</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <form role="form" action="{{ route('deleteConfigWeb') }}" method="POST">
+                  <!-- text input -->
+           @csrf                          
+           <p style="color: red; font-size: 45px; font-weight: bold;">Lưu ý!!</p><p style="font-size: 20px;" >Bạn mún xóa web này??</p>       
+            <input type="hidden" id="delete_webid" name="webid" value="">             
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+        <button type="submit" class="btn btn-primary"> Xóa </button>
+      </div>
+    </form>
+    </div>
   </div>
 </div>
 
@@ -294,7 +322,10 @@ $(function(){
         });
         $('.delete_token').click(function(){
         document.getElementById("delete_tokenid").value=$(this).data("id");
-        })
+        });
+        $('.delete_web').click(function(){
+        document.getElementById("delete_webid").value=$(this).data("id");
+        });
         $('.edit_web').click(function(){ 
         document.getElementById("edit_idPage").value=$(this).data("idpage");
         document.getElementById("edit_pageName").value=$(this).data("pagename");

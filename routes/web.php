@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //route admin
-Route::get('admintool','ConfigToolController@index' )->name('adminHome');  //về trang admin
+Route::get('admin','ConfigToolController@index' )->name('adminHome');  //về trang admin
 Route::post('admin/token','ConfigToolController@createToken')->name('adminToken'); //tao token
 Route::post('admin/web','ConfigToolController@createWeb')->name('adminWeb');//tạo cài đặt web
-Route::get('admin/web/delete/{id}','ConfigToolController@deleteConfigWeb')->name('deleteConfigWeb');//tạo cài đặt web
+Route::post('admin/web/delete','ConfigToolController@deleteConfigWeb')->name('deleteConfigWeb');//delete web
 Route::post('admin/web/edit','ConfigToolController@editConfigWeb')->name('editConfigWeb');//tạo cài đặt web
 Route::post('admin/token/delete','ConfigToolController@deleteToken')->name('deleteToken');//xóa token 
 Route::post('admin/token/edit','ConfigToolController@editToken')->name('editToken');//sửa token 
@@ -28,13 +28,9 @@ Route::post('/post/article', 'InstantArticles@postArticle')->name('postArticle')
 Route::get('/update/ia/{url}','Main@updateIa')->name('updateIa');
 Route::get('/update/updateArticle/{url}','Main@updateArticle')->name('updateArticle');
 ///////////
-Route::get('/fix', function () {
-    return view('pages.fixDraft');
-})->name('fixDraft'); 
+Route::get('/fix', 'Main@homefix')->name('fixDraft'); 
 Route::post('/fix', 'InstantArticles@fixDraft')->name('postFix');//fix lỗi draft
 //////////
-
-
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

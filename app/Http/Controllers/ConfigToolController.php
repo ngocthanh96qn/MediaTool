@@ -80,7 +80,8 @@ class ConfigToolController extends Controller
         return redirect()->route('adminHome')->with('status', 'updated!');
     }
     
-    public function deleteConfigWeb($id){
+    public function deleteConfigWeb(Request $request){
+        $id = $request->webid;
         $row = ConfigWeb::find($id);
         TokenWeb::where('web_id','=',$id)->delete();
         $row->delete();

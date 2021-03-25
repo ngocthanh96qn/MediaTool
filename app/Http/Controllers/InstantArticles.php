@@ -43,17 +43,12 @@ class InstantArticles extends Controller
     }
 
 
-    public function postArticle(Request $request){
-        
+
+     public function postArticle(Request $request)
+    {
         $id_configWeb = $request->id_configWeb;
         $post_id = $request->post_id;
-        $this->createPost($id_configWeb,$post_id);
-        return redirect()->route('pagehome');
-    }
 
-     public function createPost($id_configWeb,$post_id)
-    {
-        
         $id_token = TokenWeb::where('web_id','=',$id_configWeb)->get();
         $id_token=$id_token[0]->token_id;
         $access_token = ConfigTool::find($id_token);
@@ -353,9 +348,7 @@ $article =
         
     ]);
     // dd($response->json());
-    return redirect()->back()->with(['mes'=>"ok"]);
-    // return view('pages.home');
-         return ;
+    return redirect()->route('pagehome')->with(['status'=>"success"]);
 
      } 
 
@@ -369,73 +362,53 @@ $article =
 
 
     public function fixDraft(Request $request){
-
-
-        $seclect_web = $request->select_web;
+        $id_configWeb = $request->id_configWeb;
         $post_id = $request->post_id;
 
-        switch ($seclect_web) {
-            case '1': //xemnhanh.info
-            $domain = 'https://xemnhanh.info';
-            break;
-            case '2': //news.xemnhanh.info                       
-            $domain = 'http://news.xemnhanh.info';
-            break;
-            default:
-                # code...
-            break;
-        }       
+        $id_token = TokenWeb::where('web_id','=',$id_configWeb)->get();
+        $id_token=$id_token[0]->token_id;
+        $access_token = ConfigTool::find($id_token);
+        $access_token = $access_token->access_token;
+        
+        $configWeb = ConfigWeb::find($id_configWeb);
 
-        $response = Http::get('https://graph.facebook.com/'.$this->id_page.'?fields=access_token&access_token='. $access_token);
+        $id_page =  $configWeb->id_page;
+        $id_ads =  $configWeb->id_ads;
+        $id_analytics = $configWeb->id_analytics;
+        $id_analytics = '"'.$id_analytics.'"';
+        $domain = $configWeb->domain;       
+        $link = 'http://'.$domain.'/wp-json/wp/v2/posts/'.$post_id;
+        $add_title = '';
+      
+
+        $response = Http::get('https://graph.facebook.com/'.$id_page.'?fields=access_token&access_token='. $access_token);
         $token_page = $response->json()['access_token'];
         //lay id bai thong qua url
-        $response = Http::get("https://graph.facebook.com?id=https://xemnhanh.info/tin-tuc/".$post_id."&fields=instant_article&access_token=".$token_page);
+        
+        $response = Http::get($link);
+        if(isset($response->json()['code']))
+        {
+            dd($response->json()['message']);
+        }
+        $url =  $response->json()['link'];
+
+         $response = Http::get("https://graph.facebook.com?id=".$url."&fields=instant_article&access_token=".$token_page);
+         $instant_article = $response->json()['instant_article']['html_source'];
+          $instant_article = preg_replace('/<h1>(.*?)<\/h1>/is', '<h1> Updating - '.$post_id.' </h1>', $instant_article);
+          $content = $this->GetBetween($instant_article,'</header>','<figure class="op-tracker">');
+          $instant_article = str_replace($content, "\n<p> Updating </p>\n", $instant_article);
         $id_article = ($response->json()["instant_article"]["id"]);
         //xoa bai
-        $response = Http::delete("https://graph.facebook.com/".$id_article."?access_token=".$token_page);
+         $response = Http::delete("https://graph.facebook.com/".$id_article."?access_token=".$token_page);
         ///delete  xong
-
-
-        $instant_article= '<!doctype html>
-        <html lang="vi" prefix="op: http://media.facebook.com/op#"><head>
-        <link rel="canonical" href="'.$domain.'/tin-tuc/'.$post_id.'"/>
-        <meta charset="utf-8"/>
-        <meta property="op:generator" content="facebook-instant-articles-sdk-php"/>
-        <meta property="op:generator:version" content="1.10.0"/>
-        <meta property="op:markup_version" content="v1.0"/>
-        <meta property="op:generator:application" content="facebook-instant-articles-wp"/>
-        <meta property="op:generator:application:version" content="4.2.1"/>
-        <meta property="op:generator:transformer" content="facebook-instant-articles-sdk-php"/>
-        <meta property="op:generator:transformer:version" content="1.10.0"/>
-        <meta property="fb:article_style" content="default"/>
-        <meta property="fb:use_automatic_ad_placement" content="enable=true ad_density=default"/>
-        </head>
-        <body>
-        <article>
-        <header>
-        <figure>   
-        <img src="https://xemnhanh.info/wp-content/uploads/2020/10/photo1603254911388-16032549115691428201932.jpg"/>
-        </figure>
-        <h1>Update</h1>
-        <time class="op-published" datetime="2020-10-22T14:15:45+07:00">October 22nd, 2:15pm</time>
-        <time class="op-modified" datetime="2020-10-23T10:39:30+07:00">October 23rd, 10:39am</time>
-        <address><a>Biên tập Viên</a>- Người biên soạn bài viết - </address>
-        <figure class="op-ad"><iframe src="https://www.facebook.com/adnw_request?placement=389373932077460_389373962077457&adtype=banner300x250" width="300" height="250"></iframe>
-        </figure>
-        </header>
-        <p>Update</p>
-        </article>
-        </body>
-        </html>
-        ';
-        $response = Http::post('https://graph.facebook.com/'.$this->id_page.'/instant_articles', [
-            'access_token' => $token_page,
-            'html_source' => $instant_article,
-            'published'=> 'true',
-            'development_mode'=> 'false',
-
-        ]);
-        return view('pages.home',['notice'=>'Đợi 1 phút rồi úp lại bài bị lỗi']);
+         $response = Http::post('https://graph.facebook.com/'.$id_page.'/instant_articles', [
+        'access_token' => $token_page,
+        'html_source' => $instant_article,
+        'published'=> 'true',
+        'development_mode'=> 'false',
+        
+    ]);
+        return redirect()->route('fixDraft')->with(['status'=>"success"]);
 
     }
 

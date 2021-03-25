@@ -17,6 +17,10 @@ class Main extends Controller
     	$list_web = ConfigWeb::all();
     	 return view('pages.home',['list_web'=>$list_web]);
     }
+    public function homefix(){
+        $list_web = ConfigWeb::all();
+         return view('pages.fixDraft',['list_web'=>$list_web]);
+    }
     public function GetBetween($content,$start,$end){
         $r = explode($start, $content);
         if (isset($r[1])){

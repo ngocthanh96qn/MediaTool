@@ -2,22 +2,31 @@
 @section('content')
 <div class="container mt-5">
   <div class="row" style="background: #F3E2A9; border-radius:5px">
-    <div class="col-xl-5 offset-xl-4 mt-5 mb-5">
+    <div class="col-xl-6 mt-5 mb-5">
+
+      <p><p style="color: red; font-size:15px; display: inline;">B1:</p> &nbsp; Chọn Web </p>
+      <p><p style="color: red; font-size:15px; display: inline;">B2:</p> &nbsp; Nhập ID bài cần Fix</p>
+      <p><p style="color: red; font-size:15px; display: inline;">B3:</p> &nbsp; Ấn nút Fix Lỗi</p>
+      <p><p style="color: red; font-size:15px; display: inline;">B4:</p> &nbsp; Kiểm tra bài có tiêu đề "Updating - ID" trên Trang quản lí IA</p>
+      <p><p style="color: red; font-size:15px; display: inline;">B5:</p> &nbsp; Chờ khi nào bài "Updating - ID" hết quả cầu</p>
+      <p><p style="color: red; font-size:15px; display: inline;">B6:</p> &nbsp; Quay lại <a href="{{ route('pagehome') }}"><button class="btn-info " style="color: #000">Trang chủ</button></a>  đăng lại ID bài đó</p>
+      
+    </div>
+    <div class="col-xl-6 mt-5 mb-5">
       <form action="{{route('postFix')}}" method="POST" >
         @csrf
         <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="select_web" id="exampleRadios1" value="1" checked>
-          <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios1">
-            WEB: xemnhanh.info - PAGE: xem nhanh plus
+        
+          @foreach ($list_web as $key => $element)
+           <div class="form-check" style="line-height: 60px">
+          <input class="form-check-input" style="margin-top: 1.3rem;" type="radio" name="id_configWeb" id="exampleRadios{{$key}}" value={{$element->id}}>
+          <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px"  class="form-check-label" for="exampleRadios{{$key}}">
+            WEB: {{$element->web_name}} - PAGE: {{$element->page_name}}
           </label>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="select_web" id="exampleRadios2" value="2" >
-          <label style="color:#3B0B0B; font-size: 15px" class="form-check-label" for="exampleRadios2">
-            WEB: news.xemnhanh.info - PAGE: xem tin nhanh
-          </label>
-        </div>
+        @endforeach
+
+
         <div class="form-group text-center mt-3">
           <label style="color: red; font-size: 20px; font-weight: 900"> NHẬP ID BÀI VIẾT LỖI &nbsp;
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-globe" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -31,10 +40,12 @@
         </div>
 
       </form>
+      @if (session('status'))
+          <script type="text/javascript">
+        setTimeout(function(){ alert('Thành Công B3!'); },100);
+          </script>
+        @endif
     </div>
-
   </div>
-
-  
 </div>
 @endsection
