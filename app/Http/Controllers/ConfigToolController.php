@@ -7,6 +7,8 @@ use App\ConfigWeb;
 use App\TokenWeb;
 use Illuminate\Http\Request;
 use App\Http\Requests\EditWeb;
+use App\Http\Requests\CreateWeb;
+use App\Http\Requests\CreateToken;
 class ConfigToolController extends Controller
 {
     /**
@@ -32,7 +34,7 @@ class ConfigToolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createToken(Request $request)
+    public function createToken(CreateToken $request)
     {
     $data = $request->except('_token');
     ConfigTool::create($data);
@@ -43,7 +45,11 @@ class ConfigToolController extends Controller
 
         $row = ConfigTool::find($request->tokenid)->delete();
         $tokenWeb = TokenWeb::where('token_id',$request->tokenid)->get();
-        ConfigWeb::find($tokenWeb[0]->web_id)->delete();
+        foreach ($tokenWeb as $key => $value) {
+            ConfigWeb::find($value->web_id)->delete();
+            TokenWeb::find($value->id)->delete();
+        }
+        
         return redirect()->route('adminHome');
     }
     public function editToken(Request $request){
@@ -53,7 +59,7 @@ class ConfigToolController extends Controller
         return redirect()->route('adminHome');
     }
 
-    public function createWeb(Request $request)
+    public function createWeb(CreateWeb $request)
     {
      $data = $request->except('_token');
     $web = ConfigWeb::create($data);

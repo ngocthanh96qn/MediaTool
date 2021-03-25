@@ -7,10 +7,10 @@
       <form action="{{route('postArticle')}}" method="POST" >
         @csrf
         <h3 class="text-center" style="color: red; font-weight: 900"> CHỌN WEB </h3>
-        @foreach ($list_web as $element)
-           <div class="form-check">
-          <input class="form-check-input" type="radio" name="id_configWeb" id="exampleRadios1" value={{$element->id}} checked>
-          <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px" class="form-check-label" for="exampleRadios1">
+        @foreach ($list_web as $key => $element)
+           <div class="form-check" style="line-height: 60px">
+          <input class="form-check-input" style="margin-top: 1.3rem;" type="radio" name="id_configWeb" id="exampleRadios{{$key}}" value={{$element->id}}>
+          <label  style="color: #3B0B0B; font-size: 15px; font-weight:5px; " class="form-check-label" for="exampleRadios{{$key}}">
             WEB: {{$element->web_name}} - PAGE: {{$element->page_name}}
           </label>
         </div>
